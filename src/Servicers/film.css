@@ -1,0 +1,1333 @@
+/* ========================================
+   Film Production - Cinematic Dark Theme
+   ======================================== */
+
+:root {
+    --primary: #0F0F12;
+    --secondary: #B8860B;
+    --accent: #E6E6E6;
+    --bg-black: #000000;
+    --bg-darker: #0A0A0A;
+    --bg-card: rgba(15, 15, 18, 0.8);
+    --text-primary: #FFFFFF;
+    --text-secondary: #E6E6E6;
+    --text-muted: #999999;
+    --gold: #B8860B;
+    --gold-light: #D4AF37;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Playfair Display', 'Georgia', serif;
+    background: var(--bg-black);
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+.FilmProductionPage {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #000000 0%, #0A0A0A 50%, #0F0F12 100%);
+    position: relative;
+}
+
+/* ========================================
+   Navigation
+   ======================================== */
+
+.film-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 1.5rem 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(0, 0, 0, 0);
+}
+
+.film-nav.scrolled {
+    padding: 1rem 0;
+    background: rgba(0, 0, 0, 0.98);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 30px rgba(184, 134, 11, 0.1);
+    border-bottom: 1px solid rgba(184, 134, 11, 0.2);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    font-family: 'Georgia', serif;
+    margin-left: 2rem;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--gold);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* ========================================
+   Hero Section
+   ======================================== */
+
+.hero-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center, rgba(184, 134, 11, 0.05), transparent 70%),
+                linear-gradient(180deg, var(--bg-black) 0%, var(--primary) 100%);
+}
+
+.hero-film-reel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+    background-image: 
+        repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(184, 134, 11, 0.1) 10px, rgba(184, 134, 11, 0.1) 12px),
+        repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(230, 230, 230, 0.05) 80px, rgba(230, 230, 230, 0.05) 82px);
+    animation: reelMove 20s linear infinite;
+}
+
+@keyframes reelMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100px); }
+}
+
+.reel-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.reel-grain {
+    position: absolute;
+    inset: 0;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>');
+    opacity: 0.3;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 1000px;
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    background: rgba(184, 134, 11, 0.1);
+    border: 1px solid var(--gold);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.hero-badge.reveal-hero {
+    animation: heroReveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-headline {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary);
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.hero-headline.reveal-hero {
+    animation: heroReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+}
+
+.highlight {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subheadline {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.hero-subheadline.reveal-hero {
+    animation: heroReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.hero-cta-group {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.hero-cta-group.reveal-hero {
+    animation: heroReveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+.cta-button {
+    padding: 1.2rem 3rem;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.cta-button.primary {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--bg-black);
+    box-shadow: 0 10px 40px rgba(184, 134, 11, 0.4);
+}
+
+.cta-button.primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 60px rgba(184, 134, 11, 0.6);
+}
+
+.cta-button.secondary {
+    background: transparent;
+    color: var(--gold);
+    border: 2px solid var(--gold);
+}
+
+.cta-button.secondary:hover {
+    background: rgba(184, 134, 11, 0.1);
+    transform: translateY(-3px);
+}
+
+@keyframes heroReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   Main Content
+   ======================================== */
+
+.main-content {
+    position: relative;
+    z-index: 5;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    background: linear-gradient(135deg, var(--text-primary), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ========================================
+   Stats Section
+   ======================================== */
+
+.stats-section {
+    padding: 6rem 0 4rem;
+    position: relative;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(184, 134, 11, 0.2);
+    border-radius: 8px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.stat-card:hover::before {
+    transform: scaleX(1);
+}
+
+.stat-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    box-shadow: 0 20px 60px rgba(184, 134, 11, 0.3);
+}
+
+.stat-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 20px rgba(184, 134, 11, 0.5));
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ========================================
+   Overview Section
+   ======================================== */
+
+.overview-section {
+    padding: 4rem 0;
+}
+
+.overview-content {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.overview-text {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-top: 1.5rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ========================================
+   Featured Film Section
+   ======================================== */
+
+.featured-film-section {
+    padding: 6rem 0;
+    background: linear-gradient(180deg, transparent, rgba(184, 134, 11, 0.03), transparent);
+}
+
+.film-showcase {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 4rem;
+    margin-bottom: 4rem;
+}
+
+.film-poster-container {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+}
+
+.film-poster {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.awards-overlay {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+}
+
+.award-badge-large {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--bg-black);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(184, 134, 11, 0.5);
+}
+
+.award-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.award-text {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0.3rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.film-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.film-header {
+    border-bottom: 1px solid rgba(184, 134, 11, 0.2);
+    padding-bottom: 1.5rem;
+}
+
+.film-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.film-meta {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.meta-separator {
+    color: var(--gold);
+}
+
+.film-credits {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.credit-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.credit-label {
+    font-size: 0.85rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.credit-value {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.film-synopsis {
+    background: rgba(184, 134, 11, 0.05);
+    border-left: 3px solid var(--gold);
+    padding: 1.5rem;
+    border-radius: 4px;
+}
+
+.synopsis-title {
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+}
+
+.synopsis-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.film-accolades {
+    padding: 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid rgba(184, 134, 11, 0.2);
+    border-radius: 8px;
+}
+
+.accolades-title {
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+}
+
+.accolades-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.accolade-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(184, 134, 11, 0.05);
+    border-radius: 4px;
+}
+
+.accolade-icon {
+    font-size: 1.5rem;
+    filter: drop-shadow(0 0 10px rgba(184, 134, 11, 0.5));
+}
+
+.accolade-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.accolade-award {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.accolade-category {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.watch-trailer-btn {
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: var(--bg-black);
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(184, 134, 11, 0.4);
+    align-self: flex-start;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.watch-trailer-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(184, 134, 11, 0.6);
+}
+
+/* Film Gallery */
+.film-gallery {
+    margin-top: 4rem;
+}
+
+.gallery-title {
+    font-size: 1.8rem;
+    color: var(--gold);
+    margin-bottom: 2rem;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-icon {
+    font-size: 3rem;
+    color: var(--gold);
+}
+
+/* ========================================
+   Awards Gallery Section
+   ======================================== */
+
+.awards-gallery-section {
+    padding: 6rem 0;
+    background: linear-gradient(180deg, transparent, rgba(184, 134, 11, 0.03), transparent);
+}
+
+.awards-gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+.award-large {
+    width: 100%;
+}
+
+.awards-small-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.award-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.award-large .award-image-wrapper {
+    aspect-ratio: 16/9;
+}
+
+.award-image-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(184, 134, 11, 0.4);
+}
+
+.award-image-wrapper img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.award-image-wrapper:hover img {
+    transform: scale(1.05);
+}
+
+.award-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.7) 50%, transparent);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.award-image-wrapper:hover .award-overlay {
+    opacity: 1;
+}
+
+.award-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--gold);
+    text-align: center;
+    letter-spacing: 0.5px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.award-large .award-name {
+    font-size: 1.8rem;
+}
+
+.award-small .award-name {
+    font-size: 1rem;
+}
+
+/* ========================================
+   Services Section
+   ======================================== */
+
+.services-section {
+    padding: 6rem 0;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.service-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(184, 134, 11, 0.2);
+    border-radius: 8px;
+    padding: 2.5rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    box-shadow: 0 30px 80px rgba(184, 134, 11, 0.2);
+}
+
+.service-icon-large {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 20px rgba(184, 134, 11, 0.5));
+}
+
+.service-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.service-description {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.service-capabilities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.capability-tag {
+    padding: 0.5rem 1rem;
+    background: rgba(184, 134, 11, 0.1);
+    border: 1px solid rgba(184, 134, 11, 0.3);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: var(--gold);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ========================================
+   Partnership Section
+   ======================================== */
+
+.partnership-section {
+    padding: 6rem 0;
+    background: linear-gradient(180deg, transparent, rgba(184, 134, 11, 0.03), transparent);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.benefit-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(184, 134, 11, 0.2);
+    border-radius: 8px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    box-shadow: 0 20px 60px rgba(184, 134, 11, 0.2);
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 0 20px rgba(184, 134, 11, 0.5));
+}
+
+.benefit-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.benefit-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ========================================
+   Press Kit Section
+   ======================================== */
+
+.press-kit-section {
+    padding: 6rem 0;
+}
+
+.press-kit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.press-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(184, 134, 11, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.press-item:hover {
+    border-color: var(--gold);
+    box-shadow: 0 10px 30px rgba(184, 134, 11, 0.2);
+}
+
+.press-icon {
+    font-size: 2.5rem;
+    color: var(--gold);
+}
+
+.press-info {
+    flex: 1;
+}
+
+.press-name {
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.press-size {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.press-download {
+    padding: 0.6rem 1.5rem;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.press-download:hover {
+    background: rgba(184, 134, 11, 0.1);
+}
+
+/* ========================================
+   Collaboration Form Section
+   ======================================== */
+
+.collaboration-section {
+    padding: 6rem 0;
+}
+
+.collaboration-content {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: start;
+    background: linear-gradient(135deg, rgba(184, 134, 11, 0.05), rgba(15, 15, 18, 0.8));
+    backdrop-filter: blur(20px);
+    border-radius: 8px;
+    padding: 4rem;
+    border: 1px solid rgba(184, 134, 11, 0.2);
+}
+
+.collaboration-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.collaboration-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.collaboration-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.collaboration-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.collab-benefit {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.collaboration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form-input,
+.form-textarea {
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(184, 134, 11, 0.3);
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    transition: all 0.3s ease;
+    background: rgba(15, 15, 18, 0.6);
+    backdrop-filter: blur(10px);
+    color: var(--text-primary);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+    background: rgba(15, 15, 18, 0.8);
+}
+
+.form-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-message {
+    padding: 1rem 1.5rem;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: center;
+    animation: slideIn 0.3s ease;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.form-message.success {
+    background: rgba(0, 230, 118, 0.1);
+    border: 1px solid rgba(0, 230, 118, 0.3);
+    color: #00E676;
+}
+
+.form-message.error {
+    background: rgba(255, 77, 109, 0.1);
+    border: 1px solid rgba(255, 77, 109, 0.3);
+    color: #FF4D6D;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-submit {
+    padding: 1.2rem 2rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--bg-black);
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 40px rgba(184, 134, 11, 0.4);
+    margin-top: 0.5rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.form-submit:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 60px rgba(184, 134, 11, 0.6);
+}
+
+.form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: 0 10px 40px rgba(184, 134, 11, 0.2);
+}
+
+/* ========================================
+   Video Modal
+   ======================================== */
+
+.video-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 2rem;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: -3rem;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    color: var(--gold);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    background: var(--gold);
+    color: var(--bg-black);
+    transform: rotate(90deg);
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(184, 134, 11, 0.3);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ========================================
+   Back Button
+   ======================================== */
+/* Back Button */
+.back-button {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 77, 109, 0.9);
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.back-button::before {
+    content: '←';
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-right: 2px;
+    margin-top: -2px;
+}
+
+.back-button:hover {
+    transform: translateX(-3px);
+    background: var(--secondary);
+    box-shadow: 0 6px 20px rgba(255, 77, 109, 0.6);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================
+   Scroll Reveal Animations
+   ======================================== */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+
+@media (max-width: 1200px) {
+    .film-showcase {
+        grid-template-columns: 1fr;
+    }
+    
+    .film-poster-container {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .collaboration-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .hero-headline {
+        font-size: 2.5rem;
+    }
+    
+    .hero-cta-group {
+        flex-direction: column;
+    }
+    
+    .film-credits {
+        grid-template-columns: 1fr;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .awards-small-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .press-kit-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .awards-small-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .award-large .award-name {
+        font-size: 1.3rem;
+    }
+    
+    .award-small .award-name {
+        font-size: 0.95rem;
+    }
+    
+    .collaboration-content {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .hero-content {
+        padding: 1rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .stat-card,
+    .service-card,
+    .benefit-card {
+        padding: 1.5rem;
+    }
+    
+    .collaboration-content {
+        padding: 1.5rem;
+    }
+    
+    .cta-button {
+        width: 100%;
+    }
+}

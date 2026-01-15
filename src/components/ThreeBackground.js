@@ -56,7 +56,7 @@ const ThreeBackground = () => {
                 size: 0.1,
                 color: 0x94A3B8, // Slate color for particles
                 transparent: true,
-                opacity: 0.6,
+                opacity: 0.5,
                 blending: THREE.AdditiveBlending
             });
 

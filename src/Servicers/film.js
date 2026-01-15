@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './film.css';
 import ThreeBackground from '../components/ThreeBackground';
+import logo from './logo.png';
+import bgImage from './fouja.avif'; 
 /**
  * FORMSPREE SETUP INSTRUCTIONS:
  * Replace 'YOUR_FORM_ID' in the handleSubmit function with your actual Formspree form ID
@@ -86,7 +88,7 @@ const partnershipBenefits = [
 // Stats Data
 const statsData = [
     { number: "3", label: "National Film Awards", icon: "🏆" },
-    { number: "5+", label: "Feature Productions", icon: "🎬" },
+    { number: "1+", label: "Feature Productions", icon: "🎬" },
     { number: "15+", label: "Festival Selections", icon: "🎭" },
     { number: "100%", label: "On-Budget Delivery", icon: "💯" }
 ];
@@ -156,6 +158,7 @@ function FilmProduction() {
     const [scrolled, setScrolled] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [activeGalleryImage, setActiveGalleryImage] = useState(0);
+    const [heroTransform, setHeroTransform] = useState(0);
     
     // Form state
     const [formData, setFormData] = useState({
@@ -170,8 +173,8 @@ function FilmProduction() {
     });
     const [formStatus, setFormStatus] = useState({ loading: false, success: false, error: false });
 
+    // ✅ Force scroll to top when page loads
     useEffect(() => {
-        // Scroll to top when component mounts
         window.scrollTo(0, 0);
         
         const handleScroll = () => {
@@ -193,17 +196,60 @@ function FilmProduction() {
         };
     }, [showModal]);
 
+    // ✅ Navigation functions with black screen transition
     const navigateHome = () => {
-        const fromHomepage = sessionStorage.getItem('fromHomepage');
-        if (fromHomepage === 'true') {
-            navigate(-1);
-        } else {
-            navigate('/');
-        }
+        const returnScrollPosition = sessionStorage.getItem('returnScrollPosition');
+        const returnHash = sessionStorage.getItem('currentHash');
+        
+        console.log('🏠 Navigating home with transition overlay');
+        
+        // ✨ Create and show black screen transition overlay
+        const transitionOverlay = document.createElement('div');
+        transitionOverlay.className = 'page-transition-overlay';
+        transitionOverlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 99999;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: all;
+        `;
+        document.body.appendChild(transitionOverlay);
+        
+        // Fade in black screen immediately
+        requestAnimationFrame(() => {
+            transitionOverlay.style.opacity = '1';
+        });
+        
+        // ✨ Set instant return flag to skip loading screen
+        sessionStorage.setItem('instantReturn', 'true');
+        
+        // Navigate after black screen is fully visible (300ms)
+        setTimeout(() => {
+            navigate('/', {
+                state: {
+                    scrollPosition: returnScrollPosition,
+                    hash: returnHash,
+                    instantReturn: true
+                }
+            });
+        }, 300);
     };
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    const navigateToAbout = () => {
+        navigate('/about');
+    };
+
+    const navigateToContact = () => {
+        navigate('/contact');
+    };
+
+    const navigateToAwards = () => {
+        navigate('/awards');
     };
 
     const handleInputChange = (e) => {
@@ -265,19 +311,21 @@ function FilmProduction() {
             {/* Navigation */}
             <nav className={`film-nav ${scrolled ? 'scrolled' : ''}`}>
                 <div className="nav-container">
-                    <div className="logo" onClick={navigateHome}>SBD Energy</div>
-                    <div className="nav-links">
-                        <a href="/" className="nav-link">Home</a>
-                        <a href="/films" className="nav-link">Films</a>
-                        <a href="/services" className="nav-link">Services</a>
-                        <a href="/about" className="nav-link">About</a>
-                        <a href="/contact" className="nav-link">Contact</a>
-                    </div>
+                    {/* <div className="logo" onClick={navigateHome}>
+                        <img src={logo} alt="SBD Energy" />
+                    </div> */}
+                    {/* <div className="nav-links">
+                        <a href="/" className="nav-link" onClick={(e) => { e.preventDefault(); navigateHome(); }}>Home</a>
+                        <a href="/about" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAbout(); }}>About</a>
+                        <a href="/contact" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToContact(); }}>Contact</a>
+                        <a href="/awards" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAwards(); }}>Achievements</a>
+                    </div> */}
                 </div>
             </nav>
 
             {/* Hero Section */}
-            <section className="hero-section">
+            <section className="hero-section" style={{ transform: `translateY(-${heroTransform}px)`}}>
+            {/* // , backgroundImage: `url(${bgImage})` */}
                 <div className="hero-film-reel">
                     <div className="reel-overlay"></div>
                     <div className="reel-grain"></div>
@@ -295,7 +343,7 @@ function FilmProduction() {
                         <button className="cta-button primary" onClick={() => setShowModal(true)}>
                             View Showreel
                         </button>
-                        <button className="cta-button secondary">Connect With Producers</button>
+                        <button className="cta-button secondary" onClick={navigateToContact}>Connect With Producers</button>
                     </div>
                 </div>
             </section>

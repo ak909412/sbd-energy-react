@@ -3,70 +3,94 @@ import { useNavigate } from 'react-router-dom';
 import './branding.css';
 import ThreeBackground from '../components/ThreeBackground';
 import bgImage from './branding.png';
+import logo from './logo.png';
 
 // Services Data
 const servicesData = [
     {
         title: "Outdoor Advertising Inventory",
-        description: "Premium outdoor advertising placements across Delhi NCR's highest-traffic corridors. Our extensive inventory includes strategically positioned unipoles, large-format hoardings, and landmark sites in Gurgaon, Delhi, and connecting expressways. We own and manage premium locations near corporate hubs, shopping districts, metro stations, and major intersections ensuring maximum visibility and impressions. Each site is carefully selected based on traffic density, demographic profiling, and brand alignment. Our inventory includes lit and non-lit options, with sizes ranging from 10x20 ft to 40x40 ft. We handle all aspects including structural maintenance, lighting, permissions, and municipal compliance. With real-time availability tracking and flexible booking terms, we make outdoor advertising accessible and hassle-free.",
+        description: "Premium outdoor advertising placements across Delhi NCR's highest-traffic corridors. Our extensive inventory includes strategically positioned unipoles, large-format hoardings, and landmark sites in Gurgaon, Delhi, and connecting expressways. We own and manage premium locations near corporate hubs, shopping districts, metro stations, and major intersections ensuring maximum visibility and impressions. Each site is carefully selected based on traffic density, demographic profiling, and brand alignment. Our inventory includes lit and non-lit options, with sizes ranging from 10x20 ft to 40x40 ft. We handle all aspects including structural maintenance, lighting, permissions, and municipal compliance. With real-time availability tracking and flexible booking terms, we make outdoor advertising accessible and hassle-free. Premium locationsCorporate hubsMetro proximityLit optionsFlexible terms",
         icon: "📍",
         features: ["Premium locations", "Corporate hubs", "Metro proximity", "Lit options", "Flexible terms"],
         stats: { inventory: "150+ sites", coverage: "Delhi NCR", visibility: "5M+ daily" }
     },
     {
         title: "Creative Production & Design",
-        description: "End-to-end creative services that transform brand messages into compelling outdoor experiences. Our in-house design team specializes in large-format visual communication, understanding the unique challenges of outdoor media—visibility at speed, message hierarchy, and environmental context. We create concepts that capture attention in 3-5 seconds while maintaining brand integrity. Our production capabilities include high-resolution flex printing, vinyl graphics, 3D lettering, backlit panels, and weather-resistant materials. We ensure color accuracy, structural durability, and regulatory compliance. From initial concept sketches to final installation, we manage print quality, mounting specifications, and site-specific adaptations. Our portfolio spans product launches, brand campaigns, event promotions, and corporate branding initiatives.",
+        description: "End-to-end creative services that transform brand messages into compelling outdoor experiences. Our in-house design team specializes in large-format visual communication, understanding the unique challenges of outdoor media—visibility at speed, message hierarchy, and environmental context. We create concepts that capture attention in 3-5 seconds while maintaining brand integrity. We ensure color accuracy, structural durability, and regulatory compliance. From initial concept sketches to final installation, we manage print quality, mounting specifications, and site-specific adaptations. Our portfolio spans product launches, brand campaigns, event promotions, and corporate branding initiatives. Concept developmentLarge-format printing3D elementsWeather-proofBrand guidelines",
         icon: "🎨",
         features: ["Concept development", "Large-format printing", "3D elements", "Weather-proof", "Brand guidelines"],
         stats: { projects: "500+", turnaround: "7-10 days", satisfaction: "98%" }
     },
     {
         title: "Campaign Strategy & Management",
-        description: "Data-driven campaign planning that maximizes reach, frequency, and return on ad spend. We begin with thorough market analysis—understanding your target audience, competitive landscape, and campaign objectives. Our strategic approach includes site selection based on demographic heat maps, traffic patterns, and commuter behavior. We optimize campaign calendars considering seasonality, events, and market dynamics. Our management services cover permit acquisition, installation coordination, maintenance scheduling, and performance monitoring. We provide detailed campaign reports with impression estimates, photographic proof of presence, and maintenance logs. For multi-site campaigns, we ensure consistent brand presentation while adapting to location-specific requirements. Post-campaign analysis helps refine future strategies.",
+        description: "Data-driven campaign planning that maximizes reach, frequency, and return on ad spend. We begin with thorough market analysis—understanding your target audience, competitive landscape, and campaign objectives. Our strategic approach includes site selection based on demographic heat maps, traffic patterns, and commuter behavior. We optimize campaign calendars considering seasonality, events, and market dynamics. Our management services cover permit acquisition, installation coordination, maintenance scheduling, and performance monitoring. We provide detailed campaign reports with impression estimates, photographic proof of presence, and maintenance logs. For multi-site campaigns, we ensure consistent brand presentation while adapting to location-specific requirements. Post-campaign analysis helps refine future strategies. Market analysisSite selectionPermit handlingPerformance trackingROI optimization",
         icon: "📊",
         features: ["Market analysis", "Site selection", "Permit handling", "Performance tracking", "ROI optimization"],
         stats: { campaigns: "200+", clients: "80+", retention: "85%" }
-    },
-    {
-        title: "Digital-OOH Integration",
-        description: "Bridging traditional outdoor with digital engagement for integrated brand experiences. We create campaigns that extend beyond static billboards, incorporating QR codes, social media integrations, and mobile-responsive landing pages. Our approach includes geo-targeted mobile advertising that reinforces OOH messaging, creating multiple touchpoints with your audience. We help brands track outdoor-to-online conversions through custom URLs, promo codes, and campaign-specific landing pages. Our digital integration services include social media content creation that amplifies outdoor placements, influencer partnerships for location-based activations, and real-time campaign adjustments based on digital feedback. This omnichannel approach delivers measurable engagement beyond traditional impression metrics.",
-        icon: "🔗",
-        features: ["QR integration", "Social amplification", "Mobile targeting", "Conversion tracking", "Analytics"],
-        stats: { engagement: "+45%", conversions: "Tracked", reach: "Extended" }
     }
 ];
 
 // Portfolio Items
 const portfolioItems = [
     {
-        client: "Tech Startup Launch",
-        location: "Gurgaon - Cyber City",
+        client: "M3M",
+        location: "Delhi - GTB Nagar",
         image: "/images/branding/1.png",
-        description: "Bold product launch campaign across 15 premium unipoles"
+        description: " "
     },
     {
-        client: "Retail Fashion Brand",
-        location: "Delhi - Connaught Place",
-        image: "/images/branding/2.jpg",
-        description: "Seasonal campaign with 3D elements and ambient lighting"
+        client: "ALBAN",
+        location: "Delhi - Vishwavidyalaya Metro Station",
+        image: "/images/branding/2.png",
+        description: " "
     },
     {
-        client: "Real Estate Developer",
-        location: "NH-8 Corridor",
-        image: "/images/branding/3.jpg",
-        description: "High-impact highway campaign with QR integration"
+        client: "TATA 1mg",
+        location: "Delhi - Vishwavidyalaya Mall Road RHS",
+        image: "/images/branding/3.png",
+        description: " "
     },
     {
-        client: "FMCG Product Launch",
-        location: "Delhi Metro Stations",
+        client: "Indiabulls",
+        location: "Gurugram - Hamilton Court",
         image: "/images/branding/4.jpg",
-        description: "Multi-location metro proximity campaign"
+        description: " "
     },
     {
-        client: "Automotive Brand",
-        location: "Gurgaon - Golf Course Road",
-        image: "/images/branding/5.jpg",
-        description: "Premium backlit hoarding with dynamic messaging"
+        client: "4S",
+        location: "Gurugram - New Palam Vihar Sec. 109 Dwarka Expressway",
+        image: "/images/branding/5.png",
+        description: " "
+    },
+    {
+        client: "OTR Cafe",
+        location: "Gurugram - SPR Road",
+        image: "/images/branding/6.jpg",
+        description: " "
+    },
+    {
+        client: "Nissan",
+        location: "Bhikaji Cama Place",
+        image: "/images/branding/7.png",
+        description: " "
+    },
+    {
+        client: "Nivea",
+        location: "Delhi - Panchsheel",
+        image: "/images/branding/8.png",
+        description: " "
+    },
+    {
+        client: "AASAN",
+        location: "Wazirpur Flyover",
+        image: "/images/branding/9.jpg",
+        description: " "
+    },
+    {
+        client: "EXPERION",
+        location: "Opp. Pacific Mall, Netaji Subash Palace",
+        image: "/images/branding/10.png",
+        description: " "
     }
 ];
 
@@ -173,8 +197,8 @@ function BrandingAdvertising() {
     });
     const [formStatus, setFormStatus] = useState({ loading: false, success: false, error: false });
 
+    // ✅ Force scroll to top when page loads
     useEffect(() => {
-        // Scroll to top when component mounts
         window.scrollTo(0, 0);
         
         const handleScroll = () => {
@@ -192,18 +216,62 @@ function BrandingAdvertising() {
         return () => clearInterval(interval);
     }, []);
 
+    // ✅ Navigation functions with black screen transition
     const navigateHome = () => {
-        const fromHomepage = sessionStorage.getItem('fromHomepage');
-        if (fromHomepage === 'true') {
-            navigate(-1);
-        } else {
-            navigate('/');
-        }
+        const returnScrollPosition = sessionStorage.getItem('returnScrollPosition');
+        const returnHash = sessionStorage.getItem('currentHash');
+        
+        console.log('🏠 Navigating home with transition overlay');
+        
+        // ✨ Create and show black screen transition overlay
+        const transitionOverlay = document.createElement('div');
+        transitionOverlay.className = 'page-transition-overlay';
+        transitionOverlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 99999;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: all;
+        `;
+        document.body.appendChild(transitionOverlay);
+        
+        // Fade in black screen immediately
+        requestAnimationFrame(() => {
+            transitionOverlay.style.opacity = '1';
+        });
+        
+        // ✨ Set instant return flag to skip loading screen
+        sessionStorage.setItem('instantReturn', 'true');
+        
+        // Navigate after black screen is fully visible (300ms)
+        setTimeout(() => {
+            navigate('/', {
+                state: {
+                    scrollPosition: returnScrollPosition,
+                    hash: returnHash,
+                    instantReturn: true
+                }
+            });
+        }, 300);
     };
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    const navigateToAbout = () => {
+        navigate('/about');
     };
+
+    const navigateToContact = () => {
+        navigate('/contact');
+    };
+
+    const navigateToAwards = () => {
+        navigate('/awards');
+    };
+
 
     const nextPortfolio = () => {
         setActivePortfolio((prev) => (prev + 1) % portfolioItems.length);
@@ -264,18 +332,22 @@ function BrandingAdvertising() {
             {/* Navigation */}
             <nav className={`branding-nav ${scrolled ? 'scrolled' : ''}`}>
                 <div className="nav-container">
-                    <div className="logo" onClick={navigateHome}>SBD Energy</div>
-                    <div className="nav-links">
-                        <a href="/" className="nav-link">Home</a>
-                        <a href="/services" className="nav-link">Services</a>
-                        <a href="/about" className="nav-link">About</a>
-                        <a href="/contact" className="nav-link">Contact</a>
-                    </div>
+                    {/* <div className="logo" onClick={navigateHome}>
+                        <img src={logo} alt="SBD Energy" />
+                    </div> */}
+                    {/* <div className="logo" onClick={navigateHome}>SBD Energy</div> */}
+                    {/* <div className="nav-links">
+                        <a href="/" className="nav-link" onClick={(e) => { e.preventDefault(); navigateHome(); }}>Home</a>
+                        <a href="/about" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAbout(); }}>About</a>
+                        <a href="/contact" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToContact(); }}>Contact</a>
+                        <a href="/awards" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAwards(); }}>Achievements</a>
+                    </div> */}
                 </div>
             </nav>
 
             {/* Hero Section */}
-            <section className="hero-section" style={{ backgroundImage: `url(${bgImage})`}}>
+            <section className="hero-section">
+                {/* style={{ backgroundImage: `url(${bgImage})`}} */}
                 <div className="hero-background"></div>
                 <div className="hero-overlay"></div>
                 <div className="hero-content">
@@ -287,7 +359,11 @@ function BrandingAdvertising() {
                         High-impact outdoor placements and content-first campaigns across Delhi NCR 
                         that amplify brand visibility and ROI.
                     </p>
-                    <button className="cta-button reveal-hero" style={{ transitionDelay: '0.4s' }}>
+                    <button 
+                        className="cta-button reveal-hero" 
+                        style={{ transitionDelay: '0.4s' }}
+                        onClick={navigateToContact}
+                    >
                         Request Media Kit
                     </button>
                 </div>
@@ -315,11 +391,7 @@ function BrandingAdvertising() {
                         <div className="overview-content reveal">
                             <h2 className="section-title">Creative Strategy Meets Executional Excellence</h2>
                             <p className="overview-text">
-                                SBD's branding arm blends creative strategy with executional excellence. We offer outdoor 
-                                advertising inventory, creative production, and campaign management. Our placements include 
-                                unipoles, hoardings and premium sites in Gurgaon and Delhi. From concept to installation, 
-                                we handle every aspect of outdoor brand communication, ensuring your message reaches the 
-                                right audience at the right location with maximum impact.
+                                SBD's branding arm blends creative strategy with executional excellence. We offer outdoor advertising inventory, creative production, and campaign management. Our placements include unipoles, hoardings and premium sites in Gurgaon and Delhi. From concept to installation, we handle every aspect of outdoor brand communication, ensuring your message reaches the right audience at the right location with maximum impact.
                             </p>
                         </div>
                     </div>

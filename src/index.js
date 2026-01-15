@@ -7,12 +7,14 @@ import App from './App';
 import AboutPage from './pages/about';
 import ContactPage from './pages/Contact';
 import AwardsPage from './pages/Award';
+import Press from './pages/press';
 import Solar from './Servicers/Solar';
 import Water from './Servicers/Water';
 import ITAutomation from './Servicers/It';
 import EVCharging from './Servicers/ev';
 import BrandingAdvertising from './Servicers/branding'
 import FilmProduction from './Servicers/film'
+import Social from './pages/Social';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -23,6 +25,8 @@ root.render(
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/awards" element={<AwardsPage />} />
+        <Route path="/press" element={<Press />} />
+        <Route path="/social" element={<Social />} />
         <Route path="/solar" element={<Solar />} />
         <Route path="/water" element={<Water />} />
         <Route path="/it" element={<ITAutomation />} />

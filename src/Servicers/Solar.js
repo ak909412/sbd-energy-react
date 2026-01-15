@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Solar.css';
 import ThreeBackground from '../components/ThreeBackground';
-import bgImage from './solar.webp';
+import bgImage from './solar.webp'; 
+import logo from './logo.png';
  
 // Services Data
 const servicesData = [
@@ -15,18 +16,18 @@ const servicesData = [
             "/images/solar/sp2.jpg"
         ]
     },
-    {
+    { 
         title: "Solar Water Heating Systems",
         description: "Efficient, low-maintenance systems for hotels, hospitals and institutions; integrated with existing hot water infrastructure.",
-        lottieUrl: "https://lottie.host/22c0c419-7b51-46cb-aa6a-287f378ce0f9/n8HvwjAbIK.lottie", // Replace with your water heating Lottie URL
+        lottieUrl: "https://lottie.host/22c0c419-7b51-46cb-aa6a-287f378ce0f9/n8HvwjAbIK.lottie",
         images: [
             "/images/solar/swh.jpg"
         ]
     },
     {
         title: "Electrification of Villages",
-        description: "Mini-grids and microgrids that bring dependable electricity for lighting, livelihoods and community services. Designed for scalability and community management.",
-        lottieUrl: "https://lottie.host/51dbfd7f-3704-4920-8b09-02d0ee15060b/Wfor3de7H9.lottie", // Replace with your village electrification Lottie URL
+        description: "Many remote villages had remained without access to electricity until now. Through the installation of mini-grids and microgrids, dependable power has been brought to support lighting, livelihoods, and essential community services. These systems are designed for scalability and managed by the local community, ensuring long-term sustainability. The project included setting up off-grid solar power plants, establishing distribution networks, and providing power connections for lighting, fans, and mobile charging to every beneficiary—whether households, anganwadis, or Panchayat Bhawans. This initiative has illuminated previously inaccessible villages, bringing light, opportunity, and hope to residents while generating new sources of income and community growth.",
+        lottieUrl: "https://lottie.host/51dbfd7f-3704-4920-8b09-02d0ee15060b/Wfor3de7H9.lottie",
         images: [
             "/images/solar/esv2.jpg",
             "/images/solar/evs1.jpg",
@@ -35,8 +36,8 @@ const servicesData = [
     },
     {
         title: "Remote Area Solutions",
-        description: "Ruggedized PV systems and energy storage optimized for extreme climates and inaccessible sites.",
-        lottieUrl: "https://lottie.host/908bbd46-5ed4-4133-9b90-64d388994ec5/uazSraOL9A.lottie", // Replace with your remote area Lottie URL
+        description: "SBD successfully implemented solar power solutions in some of the most inaccessible and challenging locations—including remote regions far from road networks, uphill mountainous terrains, and areas affected by extremist activities. Despite the difficult terrain and security challenges, these installations ensured a reliable and sustainable energy supply, bringing light and progress to communities that had long remained beyond the reach of conventional infrastructure.",
+        lottieUrl: "https://lottie.host/908bbd46-5ed4-4133-9b90-64d388994ec5/uazSraOL9A.lottie",
         images: [
             "/images/solar/ril1.jpg",
             "/images/solar/ril2.jpg"
@@ -45,7 +46,7 @@ const servicesData = [
     {
         title: "Solar Research & Development",
         description: "Collaborative R&D programs with universities to test new modules, tracking systems and hybrid architectures.",
-        lottieUrl: "https://lottie.host/6d5b8111-bef3-411c-8883-9b99ec5d2c79/kvPehw1Qct.lottie", // Replace with your R&D Lottie URL
+        lottieUrl: "https://lottie.host/6d5b8111-bef3-411c-8883-9b99ec5d2c79/kvPehw1Qct.lottie",
         images: [
             "/images/solar/sp1.jpg",
             "/images/solar/sp2.jpg"
@@ -54,7 +55,7 @@ const servicesData = [
     {
         title: "Solar Hybrid Power Plants",
         description: "Integrated PV + storage + conventional backup for continuous supply and grid stability.",
-        lottieUrl: "https://lottie.host/34fbe719-fbcc-4cea-9849-eff5ec2a432a/gj0SvpqpGS.lottie", // Replace with your hybrid plants Lottie URL
+        lottieUrl: "https://lottie.host/34fbe719-fbcc-4cea-9849-eff5ec2a432a/gj0SvpqpGS.lottie",
         images: [
             "/images/solar/sh1.jpg",
             "/images/solar/sh2.jpg"
@@ -63,7 +64,7 @@ const servicesData = [
     {
         title: "Solar Water Pumping",
         description: "Solar pumps (AC/DC) for irrigation and domestic water supply with smart controllers and telemetry.",
-        lottieUrl: "https://lottie.host/c69f739f-0033-415d-85bd-0d36c5e5ae0f/qPL89fDrsJ.lottie", // Replace with your water pumping Lottie URL
+        lottieUrl: "https://lottie.host/c69f739f-0033-415d-85bd-0d36c5e5ae0f/qPL89fDrsJ.lottie",
         images: [
             "/images/solar/swp.jpg",
             "/images/solar/swp2.jpg"
@@ -72,7 +73,7 @@ const servicesData = [
     {
         title: "Solar Street Lighting",
         description: "Smart LED street lights with solar panels, motion sensors and remote monitoring.",
-        lottieUrl: "https://lottie.host/b4ad082f-d6b2-423d-a40a-1b0d1dd46fec/Z2zIpM2pIO.lottie", // Replace with your street lighting Lottie URL
+        lottieUrl: "https://lottie.host/b4ad082f-d6b2-423d-a40a-1b0d1dd46fec/Z2zIpM2pIO.lottie",
         images: [
             "/images/solar/ssl.jpg",
             "/images/solar/ssl2.jpg",
@@ -147,8 +148,8 @@ function Solar() {
         };
     }, []);
 
+    // ✅ Force scroll to top when page loads
     useEffect(() => {
-        // Scroll to top when component mounts
         window.scrollTo(0, 0);
         
         const handleScroll = () => {
@@ -160,19 +161,35 @@ function Solar() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // ✅ UPDATED: Navigation function with instant return flag
     const navigateHome = () => {
-        // Check if we came from homepage with a hash
-        const fromHomepage = sessionStorage.getItem('fromHomepage');
-        if (fromHomepage === 'true') {
-            // Navigate back to trigger the restoration logic
-            navigate(-1);
-        } else {
-            navigate('/');
-        }
+        const returnScrollPosition = sessionStorage.getItem('returnScrollPosition');
+        const returnHash = sessionStorage.getItem('currentHash');
+        
+        console.log('🏠 Navigating home with instant return');
+        
+        // ✨ Set instant return flag to skip loading screen
+        sessionStorage.setItem('instantReturn', 'true');
+        
+        navigate('/', {
+            state: {
+                scrollPosition: returnScrollPosition,
+                hash: returnHash,
+                instantReturn: true
+            }
+        });
     };
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    const navigateToAbout = () => {
+        navigate('/about');
+    };
+
+    const navigateToContact = () => {
+        navigate('/contact');
+    };
+
+    const navigateToAwards = () => {
+        navigate('/awards');
     };
 
     return (
@@ -181,18 +198,21 @@ function Solar() {
             {/* Navigation */}
             <nav className={`solar-nav ${scrolled ? 'scrolled' : ''}`}>
                 <div className="nav-container">
-                    <div className="logo" onClick={navigateHome}>SBD Energy</div>
-                    <div className="nav-links">
-                        <a href="/" className="nav-link">Home</a>
-                        <a href="/services" className="nav-link">Services</a>
-                        <a href="/about" className="nav-link">About</a>
-                        <a href="/contact" className="nav-link">Contact</a>
-                    </div>
+                    {/* <div className="logo" onClick={navigateHome}>
+                        <img src={logo} alt="SBD Energy" />
+                    </div> */}
+                    {/* <div className="nav-links">
+                        <a href="/" className="nav-link" onClick={(e) => { e.preventDefault(); navigateHome(); }}>Home</a>
+                        <a href="/about" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAbout(); }}>About</a>
+                        <a href="/contact" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToContact(); }}>Contact</a>
+                        <a href="/awards" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAwards(); }}>Achievements</a>
+                    </div> */}
                 </div>
             </nav>
 
             {/* Hero Section */}
-            <section className="hero-section" style={{ transform: `translateY(-${heroTransform}px)`, backgroundImage: `url(${bgImage})` }}>
+            <section className="hero-section" style={{ transform: `translateY(-${heroTransform}px)`}}>
+                {/* , backgroundImage: `url(${bgImage})` */}
                 <div className="hero-overlay"></div>
                 <div className="hero-content">
                     <h1 className="hero-headline reveal-hero">
@@ -202,7 +222,11 @@ function Solar() {
                         End-to-end solar services: PV systems, hybrid plants, mini-grids, pumps and street lighting — 
                         engineered for reliability and lasting impact across India.
                     </p>
-                    <button className="cta-button reveal-hero" style={{ transitionDelay: '0.4s' }}>
+                    <button 
+                        className="cta-button reveal-hero" 
+                        style={{ transitionDelay: '0.4s' }}
+                        onClick={navigateToContact}
+                    >
                         Get a Free Feasibility Assessment
                     </button>
                 </div>
@@ -333,8 +357,7 @@ function Solar() {
                             Get a free consultation and feasibility assessment.
                         </p>
                         <div className="cta-buttons">
-                            <button className="cta-primary">Schedule Consultation</button>
-                            <button className="cta-secondary">Download Brochure</button>
+                            <button className="cta-primary" onClick={navigateToContact}>Schedule Consultation</button>
                         </div>
                     </div>
                 </div>

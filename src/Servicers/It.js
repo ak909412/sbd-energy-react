@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './It.css';
 import ThreeBackground from '../components/ThreeBackground';
 import bgImage from './it.jpg';
+import logo from './logo.png';
 
 // Services Data
 const servicesData = [
@@ -85,14 +86,6 @@ const benefitsData = [
         description: "On-premise and cloud-hybrid options with complete data control"
     }
 ];
-
-const statsData = [
-    { number: "50+", label: "Smart Cities Deployed" },
-    { number: "10,000+", label: "Cameras Installed" },
-    { number: "99.9%", label: "System Uptime" },
-    { number: "24/7", label: "Monitoring & Support" }
-];
-
 // Scroll Reveal Hook
 const useScrollReveal = () => {
     useEffect(() => {
@@ -121,18 +114,9 @@ function ITAutomation() {
     useScrollReveal();
     const [scrolled, setScrolled] = useState(false);
     const [heroTransform, setHeroTransform] = useState(0);
-    
-    const handleBack = () => {
-        const fromHomepage = sessionStorage.getItem('fromHomepage');
-        if (fromHomepage === 'true') {
-            navigate(-1);
-        } else {
-            navigate('/');
-        }
-    };
 
+    // ✅ Force scroll to top when page loads
     useEffect(() => {
-        // Scroll to top when component mounts
         window.scrollTo(0, 0);
         
         const handleScroll = () => {
@@ -145,17 +129,60 @@ function ITAutomation() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // ✅ Navigation functions with black screen transition
     const navigateHome = () => {
-        const fromHomepage = sessionStorage.getItem('fromHomepage');
-        if (fromHomepage === 'true') {
-            navigate(-1);
-        } else {
-            navigate('/');
-        }
+        const returnScrollPosition = sessionStorage.getItem('returnScrollPosition');
+        const returnHash = sessionStorage.getItem('currentHash');
+        
+        console.log('🏠 Navigating home with transition overlay');
+        
+        // ✨ Create and show black screen transition overlay
+        const transitionOverlay = document.createElement('div');
+        transitionOverlay.className = 'page-transition-overlay';
+        transitionOverlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 99999;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: all;
+        `;
+        document.body.appendChild(transitionOverlay);
+        
+        // Fade in black screen immediately
+        requestAnimationFrame(() => {
+            transitionOverlay.style.opacity = '1';
+        });
+        
+        // ✨ Set instant return flag to skip loading screen
+        sessionStorage.setItem('instantReturn', 'true');
+        
+        // Navigate after black screen is fully visible (300ms)
+        setTimeout(() => {
+            navigate('/', {
+                state: {
+                    scrollPosition: returnScrollPosition,
+                    hash: returnHash,
+                    instantReturn: true
+                }
+            });
+        }, 300);
     };
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    const navigateToAbout = () => {
+        navigate('/about');
+    };
+
+    const navigateToContact = () => {
+        navigate('/contact');
+    };
+
+    const navigateToAwards = () => {
+        navigate('/awards');
     };
 
     return (
@@ -164,18 +191,21 @@ function ITAutomation() {
             {/* Navigation */}
             <nav className={`it-nav ${scrolled ? 'scrolled' : ''}`}>
                 <div className="nav-container">
-                    <div className="logo" onClick={navigateHome}>SBD Energy</div>
-                    <div className="nav-links">
-                        <a href="/" className="nav-link">Home</a>
-                        <a href="/services" className="nav-link">Services</a>
-                        <a href="/about" className="nav-link">About</a>
-                        <a href="/contact" className="nav-link">Contact</a>
-                    </div>
+                    {/* <div className="logo" onClick={navigateHome}>
+                        <img src={logo} alt="SBD Energy" />
+                    </div> */}
+                    {/* <div className="nav-links">
+                        <a href="/" className="nav-link" onClick={(e) => { e.preventDefault(); navigateHome(); }}>Home</a>
+                        <a href="/about" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAbout(); }}>About</a>
+                        <a href="/contact" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToContact(); }}>Contact</a>
+                        <a href="/awards" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAwards(); }}>Achievements</a>
+                    </div> */}
                 </div>
             </nav>
 
             {/* Hero Section */}
-            <section className="hero-section" style={{ transform: `translateY(-${heroTransform}px)` ,backgroundImage: `url(${bgImage})` }}>
+            <section className="hero-section" style={{ transform: `translateY(-${heroTransform}px)`}}>
+                {/* ,backgroundImage: `url(${bgImage})` */}
                 <div className="grid-background"></div>
                 <div className="hero-overlay"></div>
                 <div className="hero-content">
@@ -186,7 +216,11 @@ function ITAutomation() {
                         Secure, Scalable City Technology — End-to-end smart city systems: ICCC, CCTV, ITMS, 
                         OFC networks and fiber infrastructure — designed for safety, efficiency and future growth.
                     </p>
-                    <button className="cta-button reveal-hero" style={{ transitionDelay: '0.4s' }}>
+                    <button 
+                        className="cta-button reveal-hero" 
+                        style={{ transitionDelay: '0.4s' }}
+                        onClick={navigateToContact}
+                    >
                         Schedule a Tech Briefing
                     </button>
                 </div>
@@ -194,19 +228,7 @@ function ITAutomation() {
 
             <main className="main-content">
                 {/* Stats Section */}
-                <section className="stats-section">
-                    <div className="container">
-                        <div className="stats-grid">
-                            {statsData.map((stat, index) => (
-                                <div className="stat-card reveal" key={index} style={{ transitionDelay: `${index * 0.1}s` }}>
-                                    <div className="stat-number">{stat.number}</div>
-                                    <div className="stat-label">{stat.label}</div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
+        
                 {/* Overview Section */}
                 <section className="overview-section">
                     <div className="container">
@@ -324,7 +346,7 @@ function ITAutomation() {
                                 Schedule a technical briefing with our experts.
                             </p>
                             <div className="cta-buttons">
-                                <button className="cta-primary">Schedule Tech Briefing</button>
+                                <button className="cta-primary" onClick={navigateToContact}>Schedule Tech Briefing</button>
                             </div>
                         </div>
                     </div>
@@ -333,12 +355,12 @@ function ITAutomation() {
 
             {/* Back Button */}
             <div 
-            className="back-button" 
-            onClick={handleBack}
-            title="Back to Home"
-        ></div>
+                className="back-button" 
+                onClick={navigateHome}
+                title="Back to Home"
+            ></div>
         </div>
     );
-}
+} 
 
 export default ITAutomation;

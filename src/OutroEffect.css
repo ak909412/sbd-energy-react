@@ -1,0 +1,75 @@
+.outro-canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1; 
+    opacity: 1; 
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* .outro-canvas-containers {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 1;
+} */
+
+.outro-canvas-container canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.outro-canvas-container.active {
+    opacity: 1;
+}
+
+
+
+/* Ensure the outro message appears above the canvas */
+/* .outro-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    pointer-events: none;
+}
+
+.outro-message.visible {
+    opacity: 1;
+} */
+
+/* .outro-message h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+.outro-message p {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .outro-message h1 {
+        font-size: 2.5rem;
+    }
+    
+    .outro-message p {
+        font-size: 1.2rem;
+    }
+} */

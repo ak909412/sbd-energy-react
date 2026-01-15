@@ -1,6 +1,16 @@
 /* ========================================
-   EV Charging Infrastructure - Dark Theme
+   EV Charging Infrastructure - Enhanced Theme
+   EYE-CATCHING GRADIENTS & EV-THEMED BACKGROUND
    ======================================== */
+
+.EVChargingPage {
+    --text-primary: #00D4FF;
+    --gold: #00E676;
+    --secondary: #40E0FF;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
 :root {
     --primary: #0033A0;
@@ -9,9 +19,9 @@
     --bg-dark: #0A0E1A;
     --bg-darker: #050812;
     --bg-card: rgba(15, 23, 42, 0.8);
-    --text-primary: #E8F1FF;
-    --text-secondary: #94A9C9;
-    --text-muted: #64748B;
+    --text-primary: #F5FAFF;
+    --text-secondary: #B8D4F7;
+    --text-muted: #8AA3C4;
 }
 
 * {
@@ -21,16 +31,75 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background: var(--bg-darker);
     color: var(--text-primary);
     overflow-x: hidden;
 }
 
+/* ========================================
+   MAIN CONTAINER - EV-THEMED GRADIENT BACKGROUND
+   ======================================== */
+
 .EVChargingPage {
     min-height: 100vh;
-    background: linear-gradient(135deg, #050812 0%, #0A0E1A 50%, #0D1526 100%);
+    background: linear-gradient(180deg, 
+        #001a2e 0%, 
+        #002847 15%, 
+        #003d5c 30%, 
+        #004d6b 45%, 
+        #00384f 60%, 
+        #002238 75%, 
+        #001528 90%, 
+        #000a14 100%);
     position: relative;
+    color: #f0f7ff;
+    overflow-x: hidden;
+}
+
+/* ========================================
+   ANIMATED BACKGROUND ORBS - EV THEME
+   ======================================== */
+
+.EVChargingPage::before,
+.EVChargingPage::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.EVChargingPage::before {
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, #00D1FF 0%, #0077C8 100%);
+    top: -300px;
+    right: -300px;
+    animation: floatEV 25s ease-in-out infinite;
+}
+
+.EVChargingPage::after {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, #00E676 0%, #00B359 100%);
+    bottom: -250px;
+    left: -250px;
+    animation: floatEV 30s ease-in-out infinite reverse;
+}
+
+@keyframes floatEV {
+    0%, 100% { 
+        transform: translate(0, 0) scale(1); 
+    }
+    33% { 
+        transform: translate(40px, -40px) scale(1.1); 
+    }
+    66% { 
+        transform: translate(-30px, 30px) scale(0.9); 
+    }
 }
 
 /* ========================================
@@ -45,13 +114,13 @@ body {
     z-index: 1000;
     padding: 1.5rem 0;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background: rgba(5, 8, 18, 0.7);
+    background: rgba(0, 26, 46, 0.7);
     backdrop-filter: blur(10px);
 }
 
 .ev-nav.scrolled {
     padding: 1rem 0;
-    background: rgba(5, 8, 18, 0.95);
+    background: rgba(0, 26, 46, 0.95);
     backdrop-filter: blur(20px);
     box-shadow: 0 4px 30px rgba(0, 209, 255, 0.1);
     border-bottom: 1px solid rgba(0, 209, 255, 0.1);
@@ -67,16 +136,15 @@ body {
 }
 
 .logo {
-    font-size: 1.75rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--secondary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     cursor: pointer;
-    transition: transform 0.3s ease;
-    filter: drop-shadow(0 2px 4px rgba(0, 209, 255, 0.5));
-    margin-left: 2rem;
+}
+
+.logo img {
+    display: block;
+    max-width: 100%;
+    height: 3rem;
+    width: 4rem;
+    filter: brightness(1.1) drop-shadow(0 0 12px rgba(0, 209, 255, 0.4));
 }
 
 .logo:hover {
@@ -89,13 +157,14 @@ body {
 }
 
 .nav-link {
+    font-family: 'Montserrat', sans-serif;
     color: var(--text-primary);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.95rem;
     transition: all 0.3s ease;
     position: relative;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
 .nav-link::after {
@@ -110,7 +179,8 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--secondary);
+    color: #40E0FF;
+    text-shadow: 0 0 15px rgba(0, 209, 255, 0.6);
 }
 
 .nav-link:hover::after {
@@ -140,7 +210,7 @@ body {
     background: 
         radial-gradient(ellipse at top, rgba(0, 51, 160, 0.15), transparent 60%),
         radial-gradient(ellipse at bottom right, rgba(0, 230, 118, 0.1), transparent 50%),
-        linear-gradient(180deg, rgba(5, 8, 18, 0.7) 0%, rgba(10, 14, 26, 0.8) 100%);
+        linear-gradient(180deg, rgba(0, 26, 46, 0.7) 0%, rgba(0, 40, 71, 0.8) 100%);
     z-index: 1;
 }
 
@@ -165,7 +235,7 @@ body {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 0%, rgba(10, 14, 26, 0.8) 100%);
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 26, 46, 0.8) 100%);
     z-index: 3;
 }
 
@@ -173,17 +243,27 @@ body {
     position: relative;
     z-index: 10;
     max-width: 1200px;
+    width: 90%;
     text-align: center;
-    padding: 2rem;
+    padding: 2rem 3rem;
+    overflow: visible;
 }
 
 .hero-headline {
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 800;
-    line-height: 1.1;
+    font-weight: 900;
+    line-height: 1.2;
     margin-bottom: 1.5rem;
     opacity: 0;
     transform: translateY(30px);
+    color: #FFFFFF;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 209, 255, 0.3);
+    letter-spacing: -0.02em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: manual;
+    padding: 0 0.5rem;
 }
 
 .hero-headline.reveal-hero {
@@ -191,21 +271,28 @@ body {
 }
 
 .highlight {
-    background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+    background: linear-gradient(135deg, #40E0FF 0%, #40F0A0 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     position: relative;
+    filter: drop-shadow(0 2px 15px rgba(0, 230, 118, 0.5));
+    display: inline-block;
+    padding-right: 0.3em;
+    margin-right: -0.15em;
 }
 
 .hero-subheadline {
+    font-family: 'Poppins', sans-serif;
     font-size: clamp(1.1rem, 2vw, 1.4rem);
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.95);
     line-height: 1.6;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto 2.5rem;
     opacity: 0;
     transform: translateY(30px);
+    font-weight: 400;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-subheadline.reveal-hero {
@@ -213,10 +300,11 @@ body {
 }
 
 .cta-button {
+    font-family: 'Montserrat', sans-serif;
     padding: 1.2rem 3rem;
     font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--bg-darker);
+    font-weight: 700;
+    color: #001a24;
     background: linear-gradient(135deg, var(--secondary), var(--accent));
     border: none;
     border-radius: 50px;
@@ -225,6 +313,8 @@ body {
     box-shadow: 0 10px 40px rgba(0, 209, 255, 0.3);
     opacity: 0;
     transform: translateY(30px);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .cta-button.reveal-hero {
@@ -258,15 +348,57 @@ body {
     padding: 0 2rem;
 }
 
+/* ========================================
+   SECTION TITLES - EYE-CATCHING EV GRADIENT
+   ======================================== */
+
 .section-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 900;
     text-align: center;
     margin-bottom: 3rem;
-    background: linear-gradient(135deg, var(--text-primary), var(--secondary));
+    background: linear-gradient(135deg, #00D1FF 0%, #40E0FF 25%, #00E676 50%, #70FFB0 75%, #00D1FF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    position: relative;
+    padding-bottom: 1rem;
+    filter: drop-shadow(0 4px 15px rgba(0, 209, 255, 0.5));
+    letter-spacing: -0.01em;
+    animation: evGradientShift 4s ease-in-out infinite;
+}
+
+@keyframes evGradientShift {
+    0%, 100% {
+        filter: drop-shadow(0 4px 15px rgba(0, 209, 255, 0.5)) brightness(1);
+    }
+    50% {
+        filter: drop-shadow(0 4px 25px rgba(0, 230, 118, 0.8)) brightness(1.15);
+    }
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #00D1FF 0%, #00E676 50%, #40E0FF 100%);
+    border-radius: 2px;
+    box-shadow: 0 0 25px rgba(0, 209, 255, 0.7), 0 0 50px rgba(0, 230, 118, 0.4);
+    animation: evGlowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes evGlowPulse {
+    0%, 100% {
+        box-shadow: 0 0 25px rgba(0, 209, 255, 0.7), 0 0 50px rgba(0, 230, 118, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 35px rgba(0, 230, 118, 0.9), 0 0 70px rgba(0, 209, 255, 0.6);
+    }
 }
 
 /* ========================================
@@ -322,23 +454,27 @@ body {
 .stat-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
-    filter: drop-shadow(0 0 20px rgba(0, 230, 118, 0.5));
+    filter: drop-shadow(0 0 25px rgba(0, 230, 118, 0.6));
 }
 
 .stat-number {
+    font-family: 'Montserrat', sans-serif;
     font-size: 2.5rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--secondary), var(--accent));
+    font-weight: 900;
+    background: linear-gradient(135deg, #40E0FF, #40F0A0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 0.5rem;
+    filter: drop-shadow(0 2px 10px rgba(0, 230, 118, 0.4));
 }
 
 .stat-label {
+    font-family: 'Poppins', sans-serif;
     font-size: 1rem;
-    color: var(--text-secondary);
-    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* ========================================
@@ -346,108 +482,22 @@ body {
    ======================================== */
 
 .overview-section {
-    padding: 4rem 0;
-}
-
-.overview-content {
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
+    padding: 6rem 0;
 }
 
 .overview-text {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.15rem;
     line-height: 1.8;
-    color: var(--text-secondary);
-    margin-top: 1.5rem;
-}
-
-/* ========================================
-   Installations Section
-   ======================================== */
-
-.installations-section {
-    padding: 6rem 0;
-    background: linear-gradient(180deg, transparent, rgba(0, 51, 160, 0.03), transparent);
-}
-
-.installations-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.installation-card {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid rgba(0, 209, 255, 0.1);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    aspect-ratio: 16/10;
-}
-
-.installation-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(0, 209, 255, 0.4);
-    box-shadow: 0 30px 80px rgba(0, 209, 255, 0.3);
-}
-
-.installation-image {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
-.installation-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.installation-card:hover .installation-image img {
-    transform: scale(0.9);
-}
-
-.installation-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        180deg,
-        transparent 0%,
-        rgba(0, 0, 0, 0.3) 50%,
-        rgba(5, 8, 18, 0.95) 100%
-    );
-    display: flex;
-    align-items: flex-end;
-    padding: 2rem;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-}
-
-.installation-card:hover .installation-overlay {
-    opacity: 1;
-}
-
-.installation-name {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--text-primary);
+    color: rgba(255, 255, 255, 0.9);
     text-align: center;
-    width: 100%;
-    transform: translateY(20px);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-.installation-card:hover .installation-name {
-    transform: translateY(0);
+    max-width: 900px;
+    margin: 0 auto 3rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ========================================
-   Services Section
+   SERVICE SECTION - WHITE TITLES WITH FONT-WEIGHT 700
    ======================================== */
 
 .services-section {
@@ -457,106 +507,76 @@ body {
 .service-detail-card {
     background: var(--bg-card);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(0, 209, 255, 0.1);
+    border: 1px solid rgba(0, 209, 255, 0.15);
     border-radius: 24px;
     padding: 3rem;
     margin-bottom: 3rem;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: grid;
-    grid-template-columns: 1fr 400px;
+    grid-template-columns: 2fr 1fr;
     gap: 3rem;
-    align-items: start;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .service-detail-card:hover {
     border-color: rgba(0, 209, 255, 0.3);
-    box-shadow: 0 30px 80px rgba(0, 209, 255, 0.15);
-    transform: translateY(-5px);
-}
-
-.service-main {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    box-shadow: 0 20px 60px rgba(0, 209, 255, 0.15);
 }
 
 .service-header-row {
     display: flex;
-    gap: 1.5rem;
-    align-items: flex-start;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 .service-icon-large {
-    font-size: 3.5rem;
-    filter: drop-shadow(0 0 20px rgba(0, 230, 118, 0.5));
-    flex-shrink: 0;
+    font-size: 4rem;
+    filter: drop-shadow(0 0 25px rgba(0, 230, 118, 0.6));
 }
 
-.service-title-group {
-    flex: 1;
-}
-
-.service-title {
-    font-size: 1.8rem;
+.service-title-main {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 0.8rem;
+    color: #FFFFFF;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
-.service-stats-inline {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    margin-top: 0.5rem;
+.service-tagline {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
-.inline-stat {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-}
-
-.inline-stat strong {
-    color: var(--accent);
-    font-weight: 700;
-}
-
-.service-description {
-    font-size: 1rem;
+.service-description-full {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.05rem;
     line-height: 1.8;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 2rem;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .service-features-row {
     display: flex;
+    gap: 1rem;
     flex-wrap: wrap;
-    gap: 0.8rem;
+    margin-bottom: 2rem;
 }
 
 .feature-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
     padding: 0.6rem 1.2rem;
-    background: rgba(0, 209, 255, 0.1);
-    border: 1px solid rgba(0, 209, 255, 0.2);
-    border-radius: 50px;
-    font-size: 0.85rem;
-    color: var(--secondary);
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.feature-badge:hover {
-    background: rgba(0, 209, 255, 0.15);
-    border-color: var(--secondary);
-}
-
-.badge-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    box-shadow: 0 0 10px var(--accent);
+    background: rgba(0, 230, 118, 0.15);
+    border: 1px solid rgba(0, 230, 118, 0.3);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #70FFB0;
+    text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
 }
 
 .service-images-panel {
@@ -565,42 +585,106 @@ body {
     gap: 1rem;
 }
 
-.ev-image-card {
+.service-image-container {
+    height: 200px;
     border-radius: 16px;
     overflow: hidden;
-    border: 1px solid rgba(0, 209, 255, 0.1);
+    border: 1px solid rgba(0, 209, 255, 0.15);
     transition: all 0.3s ease;
-    aspect-ratio: 16/9;
 }
 
-.ev-image-card:hover {
-    border-color: var(--secondary);
+.service-image-container:hover {
+    border-color: rgba(0, 209, 255, 0.4);
     box-shadow: 0 10px 30px rgba(0, 209, 255, 0.2);
 }
 
-.ev-image-card img {
+.service-image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    transition: transform 0.5s ease;
 }
 
-.ev-image-card:hover img {
-    transform: scale(1.05);
+.service-image-container:hover img {
+    transform: scale(1.1);
 }
 
 /* ========================================
-   Charger Types Section
+   Installations Section
    ======================================== */
 
-.charger-types-section {
+.installations-section {
     padding: 6rem 0;
-    background: linear-gradient(180deg, transparent, rgba(0, 51, 160, 0.05), transparent);
+}
+
+.installations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.installation-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 209, 255, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.installation-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(0, 209, 255, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 209, 255, 0.15);
+}
+
+.installation-image {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.installation-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.installation-card:hover .installation-image img {
+    transform: scale(1.1);
+}
+
+.installation-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(0, 26, 46, 0.95), transparent);
+    backdrop-filter: blur(10px);
+}
+
+.installation-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* ========================================
+   Charger Comparison Section
+   ======================================== */
+
+.charger-comparison-section {
+    padding: 6rem 0;
 }
 
 .charger-comparison-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
 }
 
@@ -608,64 +692,81 @@ body {
     background: var(--bg-card);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(0, 209, 255, 0.1);
-    border-radius: 20px;
-    padding: 2.5rem 2rem;
+    border-radius: 24px;
+    padding: 2.5rem;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-.charger-type-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--secondary), var(--accent));
 }
 
 .charger-type-card:hover {
     transform: translateY(-10px);
-    border-color: rgba(0, 209, 255, 0.3);
-    box-shadow: 0 30px 80px rgba(0, 209, 255, 0.2);
+    border-color: rgba(0, 230, 118, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 230, 118, 0.15);
 }
 
-.charger-type-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-bottom: 1.5rem;
+.charger-header {
     text-align: center;
+    margin-bottom: 2rem;
 }
 
-.charger-spec-row {
+.charger-type-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 25px rgba(0, 230, 118, 0.6));
+}
+
+.charger-type-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.charger-power-rating {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+.charger-specs {
+    margin-top: 2rem;
+}
+
+.spec-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
     padding: 1rem 0;
-    border-bottom: 1px solid rgba(0, 209, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.charger-spec-row:last-child {
+.spec-row:last-child {
     border-bottom: none;
 }
 
 .spec-label {
+    font-family: 'Poppins', sans-serif;
     font-size: 0.95rem;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.8);
     font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .spec-value {
+    font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
-    color: var(--text-primary);
+    color: rgba(255, 255, 255, 0.95);
     font-weight: 600;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .spec-value.cost {
-    color: var(--accent);
+    color: #70FFB0;
     font-size: 1.2rem;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 230, 118, 0.4);
 }
 
 /* ========================================
@@ -701,20 +802,24 @@ body {
 .benefit-icon {
     font-size: 3rem;
     margin-bottom: 1.5rem;
-    filter: drop-shadow(0 0 20px rgba(0, 230, 118, 0.5));
+    filter: drop-shadow(0 0 25px rgba(0, 230, 118, 0.6));
 }
 
 .benefit-title {
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.3rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: #FFFFFF;
     margin-bottom: 1rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .benefit-description {
-    font-size: 0.95rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.2rem !important;
     line-height: 1.6;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* ========================================
@@ -733,11 +838,13 @@ body {
 }
 
 .footprint-text {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
     line-height: 1.8;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
     margin-top: 1.5rem;
     margin-bottom: 3rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .footprint-highlights {
@@ -763,19 +870,23 @@ body {
 }
 
 .highlight-number {
+    font-family: 'Montserrat', sans-serif;
     font-size: 3rem;
-    font-weight: 800;
-    background: linear-gradient(135deg, var(--accent), var(--secondary));
+    font-weight: 900;
+    background: linear-gradient(135deg, #70FFB0, #40E0FF);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 0.5rem;
+    filter: drop-shadow(0 2px 10px rgba(0, 230, 118, 0.4));
 }
 
 .highlight-label {
+    font-family: 'Poppins', sans-serif;
     font-size: 1rem;
-    color: var(--text-secondary);
-    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 600;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* ========================================
@@ -799,17 +910,21 @@ body {
 }
 
 .cta-title {
+    font-family: 'Montserrat', sans-serif;
     font-size: clamp(1.8rem, 4vw, 2.5rem);
-    font-weight: 700;
-    color: var(--text-primary);
+    font-weight: 900;
+    color: #FFFFFF;
     margin-bottom: 1rem;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 
 .cta-text {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.15rem;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.9);
     line-height: 1.6;
     margin-bottom: 2.5rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .cta-buttons {
@@ -820,16 +935,19 @@ body {
 }
 
 .cta-primary {
+    font-family: 'Montserrat', sans-serif;
     padding: 1.2rem 2.5rem;
     font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--bg-darker);
+    font-weight: 700;
+    color: #001a24;
     background: linear-gradient(135deg, var(--secondary), var(--accent));
     border: none;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 10px 40px rgba(0, 209, 255, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .cta-primary:hover {
@@ -838,15 +956,19 @@ body {
 }
 
 .cta-secondary {
+    font-family: 'Montserrat', sans-serif;
     padding: 1.2rem 2.5rem;
     font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--secondary);
+    font-weight: 700;
+    color: #40E0FF;
     background: transparent;
-    border: 2px solid var(--secondary);
+    border: 2px solid #40E0FF;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 15px rgba(0, 209, 255, 0.3);
 }
 
 .cta-secondary:hover {
@@ -858,16 +980,16 @@ body {
 /* ========================================
    Back Button
    ======================================== */
-/* Back Button */
+
 .back-button {
     position: fixed;
     bottom: 1.5rem;
     left: 1.5rem;
     width: 45px;
     height: 45px;
-    background: rgba(255, 77, 109, 0.9);
+    background: rgba(0, 209, 255, 0.9);
     border-radius: 8px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     cursor: pointer;
     z-index: 1000;
@@ -875,7 +997,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 25px rgba(0, 209, 255, 0.3);
 }
 
 .back-button::before {
@@ -885,13 +1007,14 @@ body {
     font-weight: 800;
     margin-right: 2px;
     margin-top: -2px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
 .back-button:hover {
     transform: translateX(-3px);
-    background: var(--secondary);
-    box-shadow: 0 6px 20px rgba(255, 77, 109, 0.6);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(0, 230, 118, 0.9);
+    box-shadow: 0 6px 20px rgba(0, 230, 118, 0.6), 0 0 40px rgba(0, 230, 118, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* ========================================
@@ -930,6 +1053,17 @@ body {
     
     .hero-headline {
         font-size: 2.5rem;
+        padding: 0 0.3rem;
+    }
+    
+    .hero-content {
+        padding: 2rem 2rem;
+        max-width: 95%;
+        width: 95%;
+    }
+    
+    .section-title {
+        font-size: clamp(2rem, 8vw, 2.8rem);
     }
     
     .service-detail-card {
@@ -939,6 +1073,10 @@ body {
     .service-header-row {
         flex-direction: column;
         text-align: center;
+    }
+    
+    .service-title-main {
+        font-size: clamp(1.6rem, 6vw, 2.2rem);
     }
     
     .service-features-row {
@@ -985,7 +1123,12 @@ body {
     }
     
     .hero-content {
-        padding: 1rem;
+        padding: 1.5rem 1.5rem;
+    }
+    
+    .hero-headline {
+        font-size: clamp(1.8rem, 9vw, 2.5rem);
+        line-height: 1.3;
     }
     
     .section-title {

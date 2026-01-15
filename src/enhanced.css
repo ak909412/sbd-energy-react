@@ -1,0 +1,361 @@
+/* ============================================
+   ENHANCED DIAGONAL WIPE - OPTIMIZED FOR SBD ENERGY
+   Based on your current implementation
+   ============================================ */
+
+/* Main diagonal wipe overlay - Enhanced visibility */
+.diagonal-wipe-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 4;
+    will-change: clip-path;
+    
+    /* Start with diagonal covering bottom-right */
+    clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
+    
+    /* SBD Energy brand green gradient */
+    background: linear-gradient(
+        135deg,
+        #0a2f1a 0%,      /* Dark green from your brand */
+        #10b981 30%,     /* Your brand green */
+        #34d399 60%,     /* Lighter green */
+        #10b981 100%     /* Back to brand green */
+    );
+    
+    /* Smooth hardware-accelerated animations */
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+/* Enhanced glow along diagonal edge - MORE VISIBLE */
+.diagonal-wipe-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Brighter glow to match your green aesthetic */
+    background: linear-gradient(
+        135deg,
+        rgba(16, 185, 129, 0.4) 0%,      /* Stronger glow */
+        transparent 20%,
+        rgba(52, 211, 153, 0.3) 50%,
+        transparent 80%,
+        rgba(110, 231, 183, 0.2) 100%
+    );
+    
+    opacity: 1;  /* Always visible */
+    mix-blend-mode: screen;
+    pointer-events: none;
+    
+    /* Subtle animation for extra polish */
+    animation: diagonalGlow 3s ease-in-out infinite;
+}
+
+@keyframes diagonalGlow {
+    0%, 100% { 
+        opacity: 0.8;
+        filter: brightness(1);
+    }
+    50% { 
+        opacity: 1;
+        filter: brightness(1.3);
+    }
+}
+
+/* Enhanced circular pattern overlay - matches your background */
+.diagonal-wipe-overlay::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    
+    /* Circular lines like in your screenshots */
+    background-image: 
+        repeating-radial-gradient(
+            circle at 100% 50%,
+            transparent 0px,
+            transparent 48px,
+            rgba(16, 185, 129, 0.15) 48px,
+            rgba(16, 185, 129, 0.15) 50px
+        );
+    
+    opacity: 0.6;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+}
+
+/* ============================================
+   IMPROVED SCROLL PROGRESS BAR
+   Matches the green bar at the top of your screenshots
+   ============================================ */
+
+.progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;  /* Slightly thicker for visibility */
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        #10b981 0%,
+        #34d399 50%,
+        #6ee7b7 100%
+    );
+    width: 0%;
+    transition: width 0.1s ease;
+    box-shadow: 
+        0 0 20px rgba(16, 185, 129, 0.8),
+        0 0 40px rgba(16, 185, 129, 0.4);  /* Stronger glow */
+    
+    /* Animated shimmer effect */
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* ============================================
+   ENHANCED PORTFOLIO CANVAS REVEAL
+   Smoother reveal for your Three.js scene
+   ============================================ */
+
+#portfolio-canvas-container {
+    /* Initial state - clipped to right side */
+    clip-path: polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%);
+    opacity: 0;
+    will-change: clip-path, opacity;
+    transition: opacity 0.3s ease;
+}
+
+#portfolio-canvas-container.revealing {
+    /* Add this class during transition */
+    filter: brightness(1.1) contrast(1.05);
+}
+
+#portfolio-canvas-container.revealed {
+    /* Final state - fully visible */
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
+}
+
+/* ============================================
+   CAROUSEL PANEL ENHANCEMENTS
+   Better visibility during diagonal transition
+   ============================================ */
+
+.carousel-panel {
+    /* Stronger glass effect during transition */
+    backdrop-filter: blur(40px) saturate(200%) brightness(1.15);
+    -webkit-backdrop-filter: blur(40px) saturate(200%) brightness(1.15);
+    
+    /* Enhanced border glow */
+    box-shadow:
+        0 0 40px rgba(255, 255, 255, 0.12),
+        0 0 80px var(--panel-theme-color, rgba(100, 180, 255, 0.2)),
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        inset 0 1px 2px rgba(255, 255, 255, 0.25);
+    
+    /* Smooth transitions */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-panel:hover {
+    transform: translateY(-10px) translateZ(15px) scale(1.03);
+    backdrop-filter: blur(50px) saturate(220%) brightness(1.2);
+    -webkit-backdrop-filter: blur(50px) saturate(220%) brightness(1.2);
+    
+    box-shadow:
+        0 0 50px rgba(255, 255, 255, 0.18),
+        0 0 100px var(--panel-theme-color, rgba(100, 180, 255, 0.3)),
+        0 20px 50px rgba(0, 0, 0, 0.6),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+/* ============================================
+   SCROLL HINT ENHANCEMENT
+   Make "scroll to explore" more noticeable
+   ============================================ */
+
+.scroll-hint {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #6ee7b7;
+    font-size: 0.95rem;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    text-shadow: 
+        0 0 20px rgba(110, 231, 183, 0.8),
+        0 0 40px rgba(110, 231, 183, 0.4);
+    
+    /* Subtle pulse animation */
+    animation: hintPulse 2s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+    0%, 100% {
+        opacity: 0.8;
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+.scroll-hint::before {
+    content: '↓';
+    animation: bounce 2s infinite;
+    font-size: 1.4rem;
+    text-shadow: 0 0 20px rgba(110, 231, 183, 1);
+}
+
+/* ============================================
+   DIAGONAL TRANSITION TIMING TWEAKS
+   Optimized for your content
+   ============================================ */
+
+/* Faster, more responsive diagonal wipe */
+.diagonal-wipe-overlay.smooth-fast {
+    /* Use this class for faster transitions */
+    transition: clip-path 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* Slower, more cinematic diagonal wipe */
+.diagonal-wipe-overlay.smooth-slow {
+    /* Use this class for more dramatic effect */
+    transition: clip-path 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ============================================
+   MOBILE OPTIMIZATIONS
+   Better performance on mobile devices
+   ============================================ */
+
+@media (max-width: 768px) {
+    /* Simplified diagonal for mobile performance */
+    .diagonal-wipe-overlay {
+        clip-path: polygon(0% 0%, 100% 0%, 40% 100%);
+    }
+    
+    .diagonal-wipe-overlay.completed {
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+    
+    /* Disable expensive effects on mobile */
+    .diagonal-wipe-overlay::before {
+        animation: none;
+        opacity: 0.6;
+    }
+    
+    .diagonal-wipe-overlay::after {
+        display: none;  /* Remove circular pattern on mobile */
+    }
+    
+    /* Simpler carousel effects */
+    .carousel-panel {
+        backdrop-filter: blur(20px) saturate(150%);
+        -webkit-backdrop-filter: blur(20px) saturate(150%);
+    }
+    
+    .carousel-panel:hover {
+        transform: translateY(-5px) scale(1.02);
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   Respect user preferences
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    .diagonal-wipe-overlay,
+    .diagonal-wipe-overlay::before,
+    .progress-fill,
+    .scroll-hint,
+    .scroll-hint::before,
+    .carousel-panel {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* ============================================
+   DIAGONAL LINE ENHANCEMENT
+   Make the diagonal edge more visible
+   ============================================ */
+
+/* Add a sharp line along the diagonal edge */
+.diagonal-wipe-overlay.with-edge-line {
+    position: relative;
+}
+
+.diagonal-wipe-overlay.with-edge-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        135deg,
+        transparent 49.5%,
+        rgba(16, 185, 129, 0.8) 49.5%,
+        rgba(16, 185, 129, 0.8) 50%,
+        rgba(52, 211, 153, 0.6) 50%,
+        rgba(52, 211, 153, 0.6) 50.5%,
+        transparent 50.5%
+    );
+    transform: translate(-25%, -25%);
+    pointer-events: none;
+    mix-blend-mode: screen;
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   Ensure smooth 60fps
+   ============================================ */
+
+.diagonal-wipe-overlay,
+#portfolio-canvas-container,
+.carousel-panel,
+.progress-fill {
+    /* Force GPU acceleration */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+}
+
+/* Only use will-change during active animations */
+.diagonal-wipe-overlay.animating {
+    will-change: clip-path;
+}
+
+.diagonal-wipe-overlay:not(.animating) {
+    will-change: auto;
+}

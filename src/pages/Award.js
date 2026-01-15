@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Award.css';
 import ThreeBackground from '../components/ThreeBackground';
+import logo from './logo.png';
+
 // --- Awards Data ---
 const awardsData = {
     main: { src: '/images/awards/rec.jpg', title: 'Major Achievement Award 2024', alt: 'Main Award' },
@@ -178,54 +181,132 @@ const RegularAwardCard = ({ award, index }) => {
 
 // --- Main Awards Page ---
 function AwardsPage() {
+    const navigate = useNavigate();
     useScrollReveal();
     const [scrolled, setScrolled] = useState(false);
     const [heroTransform, setHeroTransform] = useState(0);
+
+    // ✅ Force scroll to top when page loads
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useEffect(() => {
         const handleScroll = () => {
             const scrollY = window.scrollY;
             setScrolled(scrollY > 50);
-            // Move hero section up quickly (multiply by 1.5 for faster movement)
             setHeroTransform(scrollY * 1.5);
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // ✅ Navigation functions
+    // const navigateHome = () => {
+    //     const returnScrollPosition = sessionStorage.getItem('returnScrollPosition');
+    //     const returnHash = sessionStorage.getItem('currentHash');
+        
+    //     navigate('/', {
+    //         state: {
+    //             scrollPosition: returnScrollPosition,
+    //             hash: returnHash
+    //         }
+    //     });
+    // };
+
     const navigateHome = () => {
-        window.location.href = '/';
+        const returnScrollPosition = sessionStorage.getItem('returnScrollPosition');
+        const returnHash = sessionStorage.getItem('currentHash');
+        
+        console.log('🏠 Navigating home with transition overlay');
+        
+        // ✨ Create and show black screen transition overlay
+        const transitionOverlay = document.createElement('div');
+        transitionOverlay.className = 'page-transition-overlay';
+        transitionOverlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 99999;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: all;
+        `;
+        document.body.appendChild(transitionOverlay);
+        
+        // Fade in black screen immediately
+        requestAnimationFrame(() => {
+            transitionOverlay.style.opacity = '1';
+        });
+        
+        // ✨ Set instant return flag to skip loading screen
+        sessionStorage.setItem('instantReturn', 'true');
+        
+        // Navigate after black screen is fully visible (300ms)
+        setTimeout(() => {
+            navigate('/', {
+                state: {
+                    scrollPosition: returnScrollPosition,
+                    hash: returnHash,
+                    instantReturn: true
+                }
+            });
+        }, 300);
     };
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    const navigateToAbout = () => {
+        navigate('/about');
+    };
+
+    const navigateToContact = () => {
+        navigate('/contact');
+    };
+    
+    const navigateToAwards = () => {
+        navigate('/awards');
+    };
+
+    const navigateToSocial = () => {
+        navigate('/social');
+    };
+
+    const navigateToAPress = () => {
+        navigate('/press');
     };
 
     return (
         <div className="AwardsPage">
             <ThreeBackground />
             <nav className={`nav-bar ${scrolled ? 'scrolled' : ''}`}>
-                <div className="logo" onClick={navigateHome}>SBD Energy</div>
+                {/* <div className="logo" onClick={navigateHome}>
+                    <img src={logo} alt="SBD Energy" />
+                </div> */}
                 <div className="nav-links">
-                    <a href="/" className="nav-link">Home</a>
-                    <a href="/about" className="nav-link">About</a>
-                    <a href="/contact" className="nav-link">Contact</a>
+                    <a href="/" className="nav-link" onClick={(e) => { e.preventDefault(); navigateHome(); }}>Home</a>
+                    <a href="/about" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAbout(); }}>About</a>
+                    <a href="/awards" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAwards(); }}>Achievements</a>
+                    <a href="/social" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToSocial(); }}>Social Welfare</a>
+                    <a href="/press" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAPress(); }}>Press</a>
+                    <a href="/contact" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToContact(); }}>Contact</a>
+                    
                 </div>
             </nav>
 
-            <div className="back-button" onClick={() => window.history.back()}title="Back"
-></div>
+            <div className="back-button" onClick={navigateHome} title="Back"></div>
 
             <main className="content">
                 <section className="hero-section" style={{ transform: `translateY(-${heroTransform}px)` }}>
                     <div className="hero-decoration-top"></div>
                     <div className="hero-decoration-bottom"></div>
-                    <div className="trophy-icon reveal-hero">🏆</div>
+                    {/* <div className="trophy-icon reveal-hero">🏆</div> */}
                     <h1 className="hero-headline reveal-hero">
                         Our <span className="highlight">Achievements</span>
                     </h1>
                     <p className="hero-subheadline reveal-hero" style={{ transitionDelay: '0.2s' }}>
-                        Recognition of Excellence in Sustainable Innovation
+                        Celebrating Excellence in Sustainable Innovation
                     </p>
                     <div className="hero-stats reveal-hero" style={{ transitionDelay: '0.3s' }}>
                         <div className="hero-stat-item">

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './ev.css';
 import ThreeBackground from '../components/ThreeBackground';
 import bgImage from './ev.jpg';
+import logo from './logo.png';
 
 // Installation Locations Data
 const installationLocations = [
@@ -35,10 +36,9 @@ const installationLocations = [
 // Services Data with expanded content
 
 const statsData = [
-    { number: "5000+", label: "Chargers Deployed", icon: "" },
-    { number: "200+", label: "Sites Nationwide", icon: "" },
-    { number: "99.2%", label: "Average Uptime", icon: "" },
-    { number: "500K+", label: "Charging Sessions", icon: "" }
+    { number: "50+", label: "Chargers Deployed", icon: "" },
+    { number: "15+", label: "Sites Nationwide", icon: "" },
+    { number: "99.2%", label: "Average Uptime", icon: "" }
 ];
 
 
@@ -94,8 +94,8 @@ function EVCharging() {
     const [scrolled, setScrolled] = useState(false);
     const [heroTransform, setHeroTransform] = useState(0);
 
+    // ✅ Force scroll to top when page loads
     useEffect(() => {
-        // Scroll to top when component mounts
         window.scrollTo(0, 0);
         
         const handleScroll = () => {
@@ -107,17 +107,60 @@ function EVCharging() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // ✅ Navigation functions with black screen transition
     const navigateHome = () => {
-        const fromHomepage = sessionStorage.getItem('fromHomepage');
-        if (fromHomepage === 'true') {
-            navigate(-1);
-        } else {
-            navigate('/');
-        }
+        const returnScrollPosition = sessionStorage.getItem('returnScrollPosition');
+        const returnHash = sessionStorage.getItem('currentHash');
+        
+        console.log('🏠 Navigating home with transition overlay');
+        
+        // ✨ Create and show black screen transition overlay
+        const transitionOverlay = document.createElement('div');
+        transitionOverlay.className = 'page-transition-overlay';
+        transitionOverlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 99999;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: all;
+        `;
+        document.body.appendChild(transitionOverlay);
+        
+        // Fade in black screen immediately
+        requestAnimationFrame(() => {
+            transitionOverlay.style.opacity = '1';
+        });
+        
+        // ✨ Set instant return flag to skip loading screen
+        sessionStorage.setItem('instantReturn', 'true');
+        
+        // Navigate after black screen is fully visible (300ms)
+        setTimeout(() => {
+            navigate('/', {
+                state: {
+                    scrollPosition: returnScrollPosition,
+                    hash: returnHash,
+                    instantReturn: true
+                }
+            });
+        }, 300);
     };
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    const navigateToAbout = () => {
+        navigate('/about');
+    };
+
+    const navigateToContact = () => {
+        navigate('/contact');
+    };
+
+    const navigateToAwards = () => {
+        navigate('/awards');
     };
 
     return (
@@ -126,18 +169,21 @@ function EVCharging() {
             {/* Navigation */}
             <nav className={`ev-nav ${scrolled ? 'scrolled' : ''}`}>
                 <div className="nav-container">
-                    <div className="logo" onClick={navigateHome}>SBD Energy</div>
-                    <div className="nav-links">
-                        <a href="/" className="nav-link">Home</a>
-                        <a href="/services" className="nav-link">Services</a>
-                        <a href="/about" className="nav-link">About</a>
-                        <a href="/contact" className="nav-link">Contact</a>
-                    </div>
+                     {/* <div className="logo" onClick={navigateHome}>
+                        <img src={logo} alt="SBD Energy" />
+                    </div> */}
+                    {/* <div className="nav-links">
+                        <a href="/" className="nav-link" onClick={(e) => { e.preventDefault(); navigateHome(); }}>Home</a>
+                        <a href="/about" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAbout(); }}>About</a>
+                        <a href="/contact" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToContact(); }}>Contact</a>
+                        <a href="/awards" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAwards(); }}>Achievements</a>
+                    </div> */}
                 </div>
             </nav>
 
             {/* Hero Section */}
-            <section className="hero-section" style={{ transform: `translateY(-${heroTransform}px)`, backgroundImage: `url(${bgImage})` }}>
+            <section className="hero-section" style={{ transform: `translateY(-${heroTransform}px)`}}>
+                {/* , backgroundImage: `url(${bgImage})`  */}
                 <div className="charging-animation"></div>
                 <div className="hero-overlay"></div>
                 <div className="hero-content">
@@ -148,7 +194,11 @@ function EVCharging() {
                         Site feasibility, charger deployment, power upgrades and operation for public & private 
                         networks — reliable charging where and when it's needed.
                     </p>
-                    <button className="cta-button reveal-hero" style={{ transitionDelay: '0.4s' }}>
+                    <button 
+                        className="cta-button reveal-hero" 
+                        style={{ transitionDelay: '0.4s' }}
+                        onClick={navigateToContact}
+                    >
                         Book a Site Survey
                     </button>
                 </div>
@@ -176,12 +226,8 @@ function EVCharging() {
                         <div className="overview-content reveal">
                             <h2 className="section-title">Comprehensive EV Infrastructure Solutions</h2>
                             <p className="overview-text">
-                                SBD is a trusted provider of EV charging solutions across India. We deliver comprehensive 
-                                EV infrastructure projects covering civil works, electrical installations, charger hardware 
-                                integration, and networking solutions. Our end-to-end approach ensures reliable, interoperable 
-                                charging infrastructure for fleets, airports, municipalities and commercial spaces. With proven 
-                                experience in government partnerships and mass deployments, we're building the charging backbone 
-                                that will power India's electric mobility revolution.
+                               SBD is a trusted provider of Electric Vehicle (EV) charging solutions across India. We deliver end-to-end EV infrastructure projects, encompassing civil works, electrical installations, charger hardware integration, and networking solutions. Our comprehensive approach ensures the development of reliable, scalable, and interoperable charging networks for fleets, airports, municipalities, and commercial establishments.
+                                With proven expertise in government collaborations and large-scale deployments, SBD is helping build the charging backbone of India's electric mobility revolution. Notably, SBD was among the first companies to introduce EV charging systems for government buildings, setting a benchmark for sustainable and future-ready infrastructure.
                             </p>
                         </div>
                     </div>
@@ -251,15 +297,15 @@ function EVCharging() {
                             </p>
                             <div className="footprint-highlights">
                                 <div className="highlight-item">
-                                    <div className="highlight-number">15+</div>
+                                    <div className="highlight-number">5+</div>
                                     <div className="highlight-label">States Covered</div>
                                 </div>
                                 <div className="highlight-item">
-                                    <div className="highlight-number">50+</div>
+                                    <div className="highlight-number">5+</div>
                                     <div className="highlight-label">Cities</div>
                                 </div>
                                 <div className="highlight-item">
-                                    <div className="highlight-number">10+</div>
+                                    <div className="highlight-number">3+</div>
                                     <div className="highlight-label">Airports</div>
                                 </div>
                             </div>
@@ -277,8 +323,7 @@ function EVCharging() {
                                 Our team will conduct a comprehensive feasibility study and provide detailed recommendations.
                             </p>
                             <div className="cta-buttons">
-                                <button className="cta-primary">Book Site Survey</button>
-                                <button className="cta-secondary">Download Deployment Guide</button>
+                                <button className="cta-primary" onClick={navigateToContact}>Book Site Survey</button>
                             </div>
                         </div>
                     </div>

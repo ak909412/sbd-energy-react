@@ -1,6 +1,16 @@
 /* ========================================
-   Branding & Outdoor Advertising - Dark Theme
+   BRANDING & ADVERTISING - Enhanced Theme
+   EYE-CATCHING GRADIENTS & BRANDING-THEMED BACKGROUND
    ======================================== */
+
+.BrandingAdvertisingPage {
+    --text-primary: #f5b5c0;
+    --gold: #FFD166;
+    --secondary: #FF6B85;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
 :root {
     --primary: #1F2937;
@@ -11,7 +21,7 @@
     --bg-card: rgba(31, 41, 55, 0.6);
     --text-primary: #F9FAFB;
     --text-secondary: #D1D5DB;
-    --text-muted: #9CA3AF;
+    --text-muted: #C1C7D0;
     --border: rgba(255, 77, 109, 0.15);
 }
 
@@ -22,7 +32,7 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background: var(--bg-darker);
     color: var(--text-primary);
     overflow-x: hidden;
@@ -30,12 +40,71 @@ body {
     padding: 0;
 }
 
+/* ========================================
+   MAIN CONTAINER - BRANDING GRADIENT BACKGROUND
+   ======================================== */
+
 .BrandingAdvertisingPage {
     min-height: 100vh;
-    background: linear-gradient(135deg, #050812 0%, #0A0E1A 50%, #0F1419 100%);
+    background: linear-gradient(180deg, 
+        #1a0a14 0%, 
+        #2a1220 15%, 
+        #3d1a2f 30%, 
+        #4a1f38 45%, 
+        #3d1630 60%, 
+        #2a1222 75%, 
+        #1a0a14 90%, 
+        #0f0510 100%);
     position: relative;
     padding-top: 0;
     margin-top: 0;
+    color: #f0f7ff;
+    overflow-x: hidden;
+}
+
+/* ========================================
+   ANIMATED BACKGROUND ORBS - BRANDING THEME
+   ======================================== */
+
+.BrandingAdvertisingPage::before,
+.BrandingAdvertisingPage::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.BrandingAdvertisingPage::before {
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, #FF4D6D 0%, #D43D5C 100%);
+    top: -300px;
+    right: -300px;
+    animation: floatBranding 25s ease-in-out infinite;
+}
+
+.BrandingAdvertisingPage::after {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, #9D4EDD 0%, #7B2CBF 100%);
+    bottom: -250px;
+    left: -250px;
+    animation: floatBranding 30s ease-in-out infinite reverse;
+}
+
+@keyframes floatBranding {
+    0%, 100% { 
+        transform: translate(0, 0) scale(1); 
+    }
+    33% { 
+        transform: translate(40px, -40px) scale(1.1); 
+    }
+    66% { 
+        transform: translate(-30px, 30px) scale(0.9); 
+    }
 }
 
 /* ========================================
@@ -50,12 +119,14 @@ body {
     z-index: 1000;
     padding: 1.5rem 0;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    background: rgba(5, 8, 18, 0);
+    background: rgba(26, 10, 20, 0);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .branding-nav.scrolled {
     padding: 1rem 0;
-    background: rgba(5, 8, 18, 0.95);
+    background: rgba(26, 10, 20, 0.95);
     backdrop-filter: blur(20px);
     box-shadow: 0 4px 30px rgba(255, 77, 109, 0.15);
     border-bottom: 1px solid var(--border);
@@ -71,16 +142,15 @@ body {
 }
 
 .logo {
-    font-size: 1.75rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--secondary), var(--accent));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     cursor: pointer;
-    transition: transform 0.3s ease;
-    margin-left: 2rem;
+}
 
+.logo img {
+    display: block;
+    max-width: 100%;
+    height: 3rem;
+    width: 4rem;
+    filter: brightness(1.1) drop-shadow(0 0 12px rgba(255, 77, 109, 0.4));
 }
 
 .logo:hover {
@@ -93,12 +163,14 @@ body {
 }
 
 .nav-link {
-    color: var(--text-secondary);
+    font-family: 'Montserrat', sans-serif;
+    color: rgba(255, 255, 255, 0.95);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 700;
     font-size: 0.95rem;
     transition: all 0.3s ease;
     position: relative;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .nav-link::after {
@@ -114,6 +186,7 @@ body {
 
 .nav-link:hover {
     color: var(--secondary);
+    text-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
 }
 
 .nav-link:hover::after {
@@ -131,6 +204,7 @@ body {
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background: linear-gradient(135deg, #1a0a14 0%, #2a1220 50%, #3d1a2f 100%);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -141,24 +215,21 @@ body {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at top left, rgba(255, 77, 109, 0.15), transparent 50%),
-                radial-gradient(ellipse at bottom right, rgba(255, 209, 102, 0.1), transparent 50%),
-                linear-gradient(180deg, rgba(5, 8, 18, 0.4) 0%, rgba(10, 14, 26, 0.6) 100%);
     pointer-events: none;
     z-index: 1;
 }
 
-.hero-background {
+/* .hero-background {
     position: absolute;
     width: 100%;
     height: 100%;
     opacity: 0.4;
     background: 
         radial-gradient(circle at 20% 30%, rgba(255, 77, 109, 0.12) 0%, transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(255, 209, 102, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(157, 78, 221, 0.1) 0%, transparent 40%),
         radial-gradient(circle at 50% 50%, rgba(31, 41, 55, 0.08) 0%, transparent 50%);
     animation: floatBackground 20s ease-in-out infinite;
-}
+} */
 
 @keyframes floatBackground {
     0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
@@ -169,7 +240,7 @@ body {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 0%, rgba(10, 14, 26, 0.5) 100%);
+    background: linear-gradient(180deg, transparent 0%, rgba(26, 10, 20, 0.5) 100%);
     z-index: 2;
 }
 
@@ -177,19 +248,31 @@ body {
     position: relative;
     z-index: 10;
     max-width: 1200px;
+    width: 90%;
     text-align: center;
-    padding: 2rem;
+    padding: 3rem 4rem;
     margin-top: 60px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 80px rgba(255, 77, 109, 0.1);
+    overflow: visible;
 }
 
 .hero-headline {
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 800;
-    line-height: 1.1;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    font-weight: 900;
+    line-height: 1.2;
     margin-bottom: 1.5rem;
-    color: var(--text-primary);
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 77, 109, 0.2);
     opacity: 0;
     transform: translateY(30px);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: manual;
+    padding: 0 0.5rem;
 }
 
 .hero-headline.reveal-hero {
@@ -197,21 +280,27 @@ body {
 }
 
 .highlight {
-    background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+    background: linear-gradient(135deg, #FF4D6D 0%, #9D4EDD 50%, #FFD166 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    position: relative;
+    filter: drop-shadow(0 2px 15px rgba(255, 77, 109, 0.6));
+    display: inline-block;
+    padding-right: 0.3em;
+    margin-right: -0.15em;
 }
 
 .hero-subheadline {
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
-    color: var(--text-secondary);
-    line-height: 1.6;
-    max-width: 800px;
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.1rem, 4vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.8;
+    max-width: 900px;
     margin: 0 auto 2.5rem;
     opacity: 0;
     transform: translateY(30px);
+    font-weight: 400;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-subheadline.reveal-hero {
@@ -219,18 +308,21 @@ body {
 }
 
 .cta-button {
+    font-family: 'Montserrat', sans-serif;
     padding: 1.2rem 3rem;
     font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--bg-darker);
+    font-weight: 700;
+    color: #000000;
     background: linear-gradient(135deg, var(--secondary), #FF6B85);
     border: none;
     border-radius: 50px;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 10px 40px rgba(255, 77, 109, 0.4);
+    box-shadow: 0 5px 10px rgba(255, 77, 109, 0.5), 0 0 10px rgba(255, 77, 109, 0.3);
     opacity: 0;
     transform: translateY(30px);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .cta-button.reveal-hero {
@@ -239,7 +331,8 @@ body {
 
 .cta-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 20px 60px rgba(255, 77, 109, 0.6);
+    background: linear-gradient(135deg, #9D4EDD 0%, #7B2CBF 100%);
+    box-shadow: 0 20px 60px rgba(157, 78, 221, 0.7), 0 0 60px rgba(157, 78, 221, 0.5);
 }
 
 @keyframes heroReveal {
@@ -264,15 +357,57 @@ body {
     padding: 0 2rem;
 }
 
+/* ========================================
+   SECTION TITLES - EYE-CATCHING BRANDING GRADIENT
+   ======================================== */
+
 .section-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 900;
     text-align: center;
     margin-bottom: 3rem;
-    background: linear-gradient(135deg, var(--text-primary), var(--secondary));
+    background: linear-gradient(135deg, #FF4D6D 0%, #FF6B85 25%, #9D4EDD 50%, #C77DFF 75%, #FF4D6D 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    position: relative;
+    padding-bottom: 1rem;
+    filter: drop-shadow(0 4px 15px rgba(255, 77, 109, 0.5));
+    letter-spacing: -0.01em;
+    animation: brandingGradientShift 4s ease-in-out infinite;
+}
+
+@keyframes brandingGradientShift {
+    0%, 100% {
+        filter: drop-shadow(0 4px 15px rgba(255, 77, 109, 0.5)) brightness(1);
+    }
+    50% {
+        filter: drop-shadow(0 4px 25px rgba(157, 78, 221, 0.8)) brightness(1.15);
+    }
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, #FF4D6D 0%, #9D4EDD 50%, #FF6B85 100%);
+    border-radius: 2px;
+    box-shadow: 0 0 25px rgba(255, 77, 109, 0.7), 0 0 50px rgba(157, 78, 221, 0.4);
+    animation: brandingGlowPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes brandingGlowPulse {
+    0%, 100% {
+        box-shadow: 0 0 25px rgba(255, 77, 109, 0.7), 0 0 50px rgba(157, 78, 221, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 35px rgba(157, 78, 221, 0.9), 0 0 70px rgba(255, 77, 109, 0.6);
+    }
 }
 
 /* ========================================
@@ -327,23 +462,27 @@ body {
 .stat-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
-    filter: drop-shadow(0 0 20px rgba(255, 209, 102, 0.5));
+    filter: drop-shadow(0 0 20px rgba(157, 78, 221, 0.5));
 }
 
 .stat-number {
+    font-family: 'Montserrat', sans-serif;
     font-size: 2.5rem;
-    font-weight: 800;
+    font-weight: 900;
     background: linear-gradient(135deg, var(--secondary), var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 0.5rem;
+    filter: drop-shadow(0 2px 10px rgba(255, 77, 109, 0.4));
 }
 
 .stat-label {
+    font-family: 'Poppins', sans-serif;
     font-size: 1rem;
-    color: var(--text-secondary);
-    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 /* ========================================
@@ -361,10 +500,12 @@ body {
 }
 
 .overview-text {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.15rem;
     line-height: 1.8;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.9);
     margin-top: 1.5rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ========================================
@@ -389,7 +530,7 @@ body {
     position: relative;
     border-radius: 24px;
     overflow: hidden;
-    height: 600px;
+    height: 500px;
     box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
     border: 1px solid var(--border);
 }
@@ -405,24 +546,25 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(5, 8, 18, 0.95), transparent);
+    background: linear-gradient(to top, rgba(26, 10, 20, 0.95), transparent);
     padding: 3rem 2rem 2rem;
     color: var(--text-primary);
 }
 
 .portfolio-client {
+    font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, var(--text-primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 .portfolio-location {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .carousel-controls {
@@ -451,7 +593,7 @@ body {
 
 .carousel-btn:hover {
     background: var(--secondary);
-    color: var(--bg-darker);
+    color: #000000;
     transform: scale(1.1);
     box-shadow: 0 5px 20px rgba(255, 77, 109, 0.4);
 }
@@ -478,14 +620,16 @@ body {
 }
 
 .carousel-description {
+    font-family: 'Poppins', sans-serif;
     text-align: center;
     margin-top: 2rem;
     font-size: 1.1rem;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* ========================================
-   Services Section
+   SERVICES SECTION - WHITE TITLES WITH FONT-WEIGHT 700
    ======================================== */
 
 .services-section {
@@ -535,14 +679,16 @@ body {
 .service-icon-large {
     font-size: 3.5rem;
     margin-bottom: 1.5rem;
-    filter: drop-shadow(0 0 20px rgba(255, 209, 102, 0.5));
+    filter: drop-shadow(0 0 20px rgba(157, 78, 221, 0.5));
 }
 
 .service-title {
-    font-size: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 1.8rem);
     font-weight: 700;
-    color: var(--text-primary);
+    color: #ffffff;
     margin-bottom: 1rem;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
 .service-stats-row {
@@ -555,6 +701,7 @@ body {
 }
 
 .service-stat {
+    font-family: 'Poppins', sans-serif;
     font-size: 0.85rem;
     color: var(--text-muted);
 }
@@ -565,10 +712,12 @@ body {
 }
 
 .service-description {
+    font-family: 'Poppins', sans-serif;
     font-size: 0.95rem;
     line-height: 1.7;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
     margin-bottom: 1.5rem;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .service-features {
@@ -578,18 +727,20 @@ body {
 }
 
 .feature-tag {
+    font-family: 'Montserrat', sans-serif;
     padding: 0.5rem 1rem;
-    background: rgba(255, 77, 109, 0.1);
-    border: 1px solid rgba(255, 77, 109, 0.2);
+    background: rgba(255, 77, 109, 0.15);
+    border: 1px solid rgba(255, 77, 109, 0.3);
     border-radius: 50px;
     font-size: 0.8rem;
     color: var(--secondary);
-    font-weight: 500;
+    font-weight: 600;
     transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(255, 77, 109, 0.3);
 }
 
 .feature-tag:hover {
-    background: rgba(255, 77, 109, 0.15);
+    background: rgba(255, 77, 109, 0.2);
     border-color: var(--secondary);
 }
 
@@ -599,7 +750,7 @@ body {
 
 .case-study-section {
     padding: 6rem 0;
-    background: linear-gradient(135deg, rgba(255, 77, 109, 0.05), rgba(255, 209, 102, 0.05));
+    background: linear-gradient(135deg, rgba(255, 77, 109, 0.05), rgba(157, 78, 221, 0.05));
 }
 
 .case-study-content {
@@ -618,20 +769,20 @@ body {
 }
 
 .case-client {
+    font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: #ffffff;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, var(--text-primary), var(--secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
 .case-challenge {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
     line-height: 1.7;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .case-challenge strong {
@@ -646,12 +797,14 @@ body {
 }
 
 .case-subtitle {
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.3rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: #ffffff;
     margin-bottom: 1.5rem;
     position: relative;
     padding-left: 1rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .case-subtitle::before {
@@ -671,10 +824,12 @@ body {
 }
 
 .case-list li {
+    font-family: 'Poppins', sans-serif;
     padding: 0.8rem 0 0.8rem 2rem;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
     line-height: 1.6;
     position: relative;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .case-list li::before {
@@ -687,7 +842,7 @@ body {
 
 .case-impact {
     padding: 2rem;
-    background: rgba(255, 77, 109, 0.05);
+    background: rgba(255, 77, 109, 0.08);
     border-radius: 16px;
     margin-top: 2rem;
     border: 1px solid var(--border);
@@ -717,20 +872,24 @@ body {
 }
 
 .impact-value {
+    font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
-    font-weight: 800;
+    font-weight: 900;
     background: linear-gradient(135deg, var(--secondary), var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     margin-bottom: 0.5rem;
+    filter: drop-shadow(0 2px 10px rgba(255, 77, 109, 0.4));
 }
 
 .impact-label {
+    font-family: 'Poppins', sans-serif;
     font-size: 0.9rem;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
     font-weight: 500;
     text-transform: capitalize;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 /* ========================================
@@ -778,17 +937,21 @@ body {
 }
 
 .spec-size {
+    font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
-    font-weight: 800;
-    color: var(--text-primary);
+    font-weight: 700;
+    color: #ffffff;
     margin-bottom: 0.8rem;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 .spec-type {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
     font-weight: 600;
     margin-bottom: 1.5rem;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .spec-details {
@@ -801,12 +964,14 @@ body {
 }
 
 .spec-price {
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.3rem;
     color: var(--accent);
     font-weight: 700;
 }
 
 .spec-visibility {
+    font-family: 'Poppins', sans-serif;
     font-size: 0.85rem;
     color: var(--text-muted);
 }
@@ -817,7 +982,7 @@ body {
 
 .testimonials-section {
     padding: 6rem 0;
-    background: linear-gradient(180deg, transparent, rgba(255, 209, 102, 0.05), transparent);
+    background: linear-gradient(180deg, transparent, rgba(157, 78, 221, 0.05), transparent);
 }
 
 .testimonials-grid {
@@ -860,11 +1025,12 @@ body {
 }
 
 .testimonial-quote {
+    font-family: 'Poppins', sans-serif;
     font-size: 1rem;
     line-height: 1.7;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
     margin-bottom: 1.5rem;
-    font-style: italic;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .testimonial-author {
@@ -873,13 +1039,16 @@ body {
 }
 
 .author-name {
+    font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
     font-weight: 700;
-    color: var(--text-primary);
+    color: #ffffff;
     margin-bottom: 0.3rem;
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .author-position {
+    font-family: 'Poppins', sans-serif;
     font-size: 0.9rem;
     color: var(--text-muted);
 }
@@ -897,7 +1066,7 @@ body {
     grid-template-columns: 1fr 1.2fr;
     gap: 4rem;
     align-items: start;
-    background: linear-gradient(135deg, rgba(255, 77, 109, 0.08), rgba(255, 209, 102, 0.08));
+    background: linear-gradient(135deg, rgba(255, 77, 109, 0.08), rgba(157, 78, 221, 0.08));
     backdrop-filter: blur(20px);
     border-radius: 30px;
     padding: 4rem;
@@ -911,16 +1080,20 @@ body {
 }
 
 .booking-title {
+    font-family: 'Montserrat', sans-serif;
     font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--text-primary);
+    font-weight: 900;
+    color: #ffffff;
     line-height: 1.2;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.4), 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
 .booking-text {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.1rem;
     line-height: 1.7;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 .booking-benefits {
@@ -930,11 +1103,13 @@ body {
 }
 
 .benefit-item {
+    font-family: 'Poppins', sans-serif;
     font-size: 1rem;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.85);
     display: flex;
     align-items: center;
     gap: 0.8rem;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .booking-form {
@@ -945,11 +1120,11 @@ body {
 
 .form-input,
 .form-textarea {
+    font-family: 'Poppins', sans-serif;
     padding: 1rem 1.5rem;
     border: 1px solid var(--border);
     border-radius: 12px;
     font-size: 1rem;
-    font-family: inherit;
     transition: all 0.3s ease;
     background: rgba(31, 41, 55, 0.4);
     backdrop-filter: blur(10px);
@@ -1007,10 +1182,11 @@ body {
 }
 
 .form-submit {
+    font-family: 'Montserrat', sans-serif;
     padding: 1.2rem 2rem;
     font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--bg-darker);
+    font-weight: 700;
+    color: #000000;
     background: linear-gradient(135deg, var(--secondary), #FF6B85);
     border: none;
     border-radius: 12px;
@@ -1018,11 +1194,14 @@ body {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 10px 40px rgba(255, 77, 109, 0.4);
     margin-top: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .form-submit:hover:not(:disabled) {
     transform: translateY(-3px);
-    box-shadow: 0 20px 60px rgba(255, 77, 109, 0.6);
+    background: linear-gradient(135deg, #9D4EDD 0%, #7B2CBF 100%);
+    box-shadow: 0 20px 60px rgba(157, 78, 221, 0.6);
 }
 
 .form-submit:disabled {
@@ -1036,7 +1215,6 @@ body {
    Back Button
    ======================================== */
 
-/* Back Button */
 .back-button {
     position: fixed;
     bottom: 1.5rem;
@@ -1044,9 +1222,9 @@ body {
     top: auto;
     width: 45px;
     height: 45px;
-    background: rgba(255, 77, 109, 0.9);
+    background: rgba(255, 77, 109, 0.95);
     border-radius: 8px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(10px);
     cursor: pointer;
     z-index: 1000;
@@ -1054,7 +1232,7 @@ body {
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 25px rgba(255, 77, 109, 0.3);
 }
 
 .back-button::before {
@@ -1064,13 +1242,14 @@ body {
     font-weight: 800;
     margin-right: 2px;
     margin-top: -2px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
 }
 
 .back-button:hover {
     transform: translateX(-3px);
-    background: var(--secondary);
-    box-shadow: 0 6px 20px rgba(255, 77, 109, 0.6);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(157, 78, 221, 1);
+    box-shadow: 0 6px 20px rgba(157, 78, 221, 0.7), 0 0 40px rgba(157, 78, 221, 0.4);
+    border-color: rgba(255, 255, 255, 0.3);
 }
 
 /* ========================================
@@ -1106,6 +1285,17 @@ body {
     
     .hero-headline {
         font-size: 2.5rem;
+        padding: 0 0.3rem;
+    }
+    
+    .hero-content {
+        padding: 2rem 2rem;
+        max-width: 95%;
+        width: 95%;
+    }
+    
+    .section-title {
+        font-size: clamp(2rem, 8vw, 2.8rem);
     }
     
     .services-grid {
@@ -1143,7 +1333,12 @@ body {
     }
     
     .hero-content {
-        padding: 1rem;
+        padding: 1.5rem 1.5rem;
+    }
+    
+    .hero-headline {
+        font-size: clamp(1.8rem, 9vw, 2.5rem);
+        line-height: 1.3;
     }
     
     .section-title {

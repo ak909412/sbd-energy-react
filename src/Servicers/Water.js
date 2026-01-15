@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import './Water.css';
 import ThreeBackground from '../components/ThreeBackground';
 import bgImage from './water.jpg';
+import logo from './logo.png';
 
 // Services Data
 const servicesData = [
     {
         title: "Har Ghar Jal – Jal Jeevan Mission Implementation",
-        description: "End-to-end delivery of household water connections with periodic water quality monitoring and community engagement. Ensuring every home has access to clean, safe drinking water.",
+        description: "Even after more than five decades of independence, many rural communities continued to struggle for access to clean and safe drinking water, a basic human necessity. Most villages relied on traditional and often unsafe sources such as rivers, lakes, and tube wells. A comprehensive initiative was undertaken to ensure end-to-end water supply solutions—from source development to household tap connections, coupled with regular water quality monitoring and active community participation. We have installed the plants even in remote, disturbed, and previously inaccessible regions, ensuring that every household receives reliable access to clean drinking water, improving the health, dignity, and quality of life of the villagers.",
         lottieUrl: "https://lottie.host/22c0c419-7b51-46cb-aa6a-287f378ce0f9/n8HvwjAbIK.lottie",
         images: [
             "/images/water/hgj1.jpg",
@@ -117,8 +118,8 @@ function Water() {
         };
     }, []);
 
+    // ✅ Force scroll to top when page loads
     useEffect(() => {
-        // Scroll to top when component mounts
         window.scrollTo(0, 0);
         
         const handleScroll = () => {
@@ -130,16 +131,61 @@ function Water() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // ✅ Navigation functions with black screen transition
     const navigateHome = () => {
-        const fromHomepage = sessionStorage.getItem('fromHomepage');
-        if (fromHomepage === 'true') {
-            navigate(-1);
-        } else {
-            navigate('/');
-        }
+        const returnScrollPosition = sessionStorage.getItem('returnScrollPosition');
+        const returnHash = sessionStorage.getItem('currentHash');
+        
+        console.log('🏠 Navigating home with transition overlay');
+        
+        // ✨ Create and show black screen transition overlay
+        const transitionOverlay = document.createElement('div');
+        transitionOverlay.className = 'page-transition-overlay';
+        transitionOverlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 99999;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            pointer-events: all;
+        `;
+        document.body.appendChild(transitionOverlay);
+        
+        // Fade in black screen immediately
+        requestAnimationFrame(() => {
+            transitionOverlay.style.opacity = '1';
+        });
+        
+        // ✨ Set instant return flag to skip loading screen
+        sessionStorage.setItem('instantReturn', 'true');
+        
+        // Navigate after black screen is fully visible (300ms)
+        setTimeout(() => {
+            navigate('/', {
+                state: {
+                    scrollPosition: returnScrollPosition,
+                    hash: returnHash,
+                    instantReturn: true
+                }
+            });
+        }, 300);
     };
 
-    
+    const navigateToAbout = () => {
+        navigate('/about');
+    };
+
+    const navigateToContact = () => {
+        navigate('/contact');
+    };
+
+    const navigateToAwards = () => {
+        navigate('/awards');
+    };
 
     return (
         <div className="WaterPage">
@@ -148,18 +194,21 @@ function Water() {
             {/* Navigation */}
             <nav className={`water-nav ${scrolled ? 'scrolled' : ''}`}>
                 <div className="nav-container">
-                    <div className="logo" onClick={navigateHome}>SBD Energy</div>
-                    <div className="nav-links">
-                        <a href="/" className="nav-link">Home</a>
-                        <a href="/services" className="nav-link">Services</a>
-                        <a href="/about" className="nav-link">About</a>
-                        <a href="/contact" className="nav-link">Contact</a>
-                    </div>
+                    {/* <div className="logo" onClick={navigateHome}>
+                        <img src={logo} alt="SBD Energy" />
+                    </div> */}
+                    {/* <div className="nav-links">
+                        <a href="/" className="nav-link" onClick={(e) => { e.preventDefault(); navigateHome(); }}>Home</a>
+                        <a href="/about" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAbout(); }}>About</a>
+                        <a href="/contact" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToContact(); }}>Contact</a>
+                        <a href="/awards" className="nav-link" onClick={(e) => { e.preventDefault(); navigateToAwards(); }}>Achievements</a>
+                    </div> */}
                 </div>
             </nav>
 
             {/* Hero Section */}
-            <section className="hero-section" style={{ transform: `translateY(-${heroTransform}px)`, backgroundImage: `url(${bgImage})`  }}>
+            <section className="hero-section" style={{ transform: `translateY(-${heroTransform}px)`}}>
+                {/* , backgroundImage: `url(${bgImage})` */}
                 <div className="hero-overlay"></div>
                 <div className="hero-content">
                     <h1 className="hero-headline reveal-hero">
@@ -169,7 +218,11 @@ function Water() {
                         Scalable Water Distribution & Purification — Implementing Jal Jeevan Mission 
                         (Har Ghar Jal) projects and rural piped water schemes in Bihar, Assam and beyond.
                     </p>
-                    <button className="cta-button reveal-hero" style={{ transitionDelay: '0.4s' }}>
+                    <button 
+                        className="cta-button reveal-hero" 
+                        style={{ transitionDelay: '0.4s' }}
+                        onClick={navigateToContact}
+                    >
                         Request Project Consultation
                     </button>
                 </div>
@@ -190,11 +243,11 @@ function Water() {
                         </div>
                         <div className="overview-stats reveal" style={{ transitionDelay: '0.2s' }}>
                             <div className="stat-item">
-                                <div className="stat-number">500K+</div>
+                                <div className="stat-number">50K+</div>
                                 <div className="stat-label">Households Connected</div>
                             </div>
                             <div className="stat-item">
-                                <div className="stat-number">100+</div>
+                                <div className="stat-number">10+</div>
                                 <div className="stat-label">Districts Covered</div>
                             </div>
                             <div className="stat-item">
@@ -302,9 +355,8 @@ function Water() {
                                 Get expert consultation on Jal Jeevan Mission implementation and water distribution systems.
                             </p>
                             <div className="cta-buttons">
-                                <button className="cta-primary">Schedule Consultation</button>
-                                <button className="cta-secondary">Download Project Reports</button>
-                            </div>
+                                <button className="cta-primary" onClick={navigateToContact}>Schedule Consultation</button>
+                           </div>
                         </div>
                     </div>
                 </section>
